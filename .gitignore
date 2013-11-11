@@ -61,6 +61,16 @@ Packages/
 #Allow NuGet.exe
 !NuGet.exe
 
+#Allow SDL
+!SDL2-2.0.0/lib/x86/*.dll
+!SDL2-2.0.0/lib/x86/*.lib
+!SDL2-2.0.0/lib/x64/*.dll
+!SDL2-2.0.0/lib/x64/*.lib
+
+#Allow build library files
+!Debug/*.dll
+!Debug/*.lib
+
 #Ignore generated nupkg files
 *.nupkg
 
