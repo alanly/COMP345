@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FDB591EB-09A9-4274-B4F8-9EC72EC05BBD}</ProjectGuid>
+    <RootNamespace>DnDProject</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\SDL2-2.0.0\include;..\tinyxml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\SDL2-2.0.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\tinyxml\tinyxml2.cpp" />
+    <ClCompile Include="ArmourItem.cpp" />
+    <ClCompile Include="BeltItem.cpp" />
+    <ClCompile Include="BootsItem.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterEditor.cpp" />
+    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="Dice.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameEngineMap.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="HelmetItem.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LoaderParameters.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="MapView.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="RingItem.cpp" />
+    <ClCompile Include="SDL_Utilities.cpp" />
+    <ClCompile Include="ShieldItem.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="WeaponItem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\tinyxml\tinyxml2.h" />
+    <ClInclude Include="ArmourItem.h" />
+    <ClInclude Include="BeltItem.h" />
+    <ClInclude Include="BootsItem.h" />
+    <ClInclude Include="ButtonConstants.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterEditor.h" />
+    <ClInclude Include="Container.h" />
+    <ClInclude Include="ContainerType.h" />
+    <ClInclude Include="Dice.h" />
+    <ClInclude Include="dirent.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Enum_Utility.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameEngineMap.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HelmetItem.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemEnhancement.h" />
+    <ClInclude Include="ItemType.h" />
+    <ClInclude Include="LoaderParameters.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="MapView.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="RingItem.h" />
+    <ClInclude Include="SDL_Utilities.h" />
+    <ClInclude Include="ShieldItem.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="WeaponItem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\character-editor\loadcharacter-btn.png" />
+    <Image Include="images\character-editor\newcharacter-btn.png" />
+    <Image Include="images\main-menu.png" />
+    <Image Include="images\main-menu\charactereditor-btn.png" />
+    <Image Include="images\main-menu\continue-btn.png" />
+    <Image Include="images\main-menu\mapeditor-btn.png" />
+    <Image Include="images\main-menu\newgame-btn.png" />
+    <Image Include="images\main-menu\quit-btn.png" />
+    <Image Include="images\spritesheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\Helvetica-Light.ttf" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
