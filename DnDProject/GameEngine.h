@@ -8,18 +8,17 @@
 class GameEngine : public GameObject
 {
 private:
-	enum MapEditorView {MAIN,
+	enum GameEngineView {MAIN,
 						GAMEOVER};
 
 	GameObject* gameUI;
 
 	Character* c;
 
-	// Editor view.
 	Map* map;
 	GameEngineMap* mapView;
 
-	MapEditorView currentView;
+	GameEngineView currentView;
 
 public:
 	GameEngine(LoaderParameters* parameters);

@@ -11,10 +11,6 @@ GameEngineMap::GameEngineMap(LoaderParameters* parameters, Map* map, Character* 
 	this->map = map;
 	this->character = character;
 
-	// Since the map view size depends on the cell size and how many cells there are, we set the parameters here.
-	this->parameters->setWidth(map->getWidth() * CELL_SIZE);
-	this->parameters->setHeight(map->getBreadth() * CELL_SIZE);
-
 	loadTextures();
 }
 
@@ -29,55 +25,73 @@ void GameEngineMap::drawTile(LoaderParameters* tile)
 
 int GameEngineMap::getMouseClickedRow()
 {
-	return (InputHandler::getInstance()->getMouseY() - parameters->getYPos()) / CELL_SIZE;
+	//return (InputHandler::getInstance()->getMouseY() - parameters->getYPos()) / CELL_SIZE;
+	return (InputHandler::getInstance()->getMouseY() - parameters->getYPos()) / CELL_SIZE + 
+		map->getCharacterPosition().y - 7;
 }
 
 int GameEngineMap::getMouseClickedColumn()
 {
-	return (InputHandler::getInstance()->getMouseX() - parameters->getXPos()) / CELL_SIZE;
+	return (InputHandler::getInstance()->getMouseX() - parameters->getXPos()) / CELL_SIZE + 
+		map->getCharacterPosition().x - 10;
 }
 
 void GameEngineMap::draw()
 {
-	// 
 	LoaderParameters* tile = nullptr;
 
-	int startX = map->getCharacterPosition().x - 7;
+	int startX = map->getCharacterPosition().x - 10;
 	int startY = map->getCharacterPosition().y - 7;
-	//cout<<"["<<map->getCharacterPosition().x<<", "<<map->getCharacterPosition().x<<"]"<<endl;
-	//cout<<"drawing from: "<<startX<<", "<<startY<<" to "<<startX+15<<", "<<startY+15<<endl;
 	for (int i = 0; i < 15; i++)
 	{
-		for (int j = 0; j < 20; j++)
+		for (int j = 0; j < 21; j++)
 		{
-			//cout<<(16 + (j * CELL_SIZE))<<" ";
-			//tile = new LoaderParameters(16 + (j * CELL_SIZE), 16 + (i * CELL_SIZE), CELL_SIZE, CELL_SIZE, 0, 0, "emptyTile");
-			tile = new LoaderParameters(16 + j*32 , 16 +i*32 , CELL_SIZE, CELL_SIZE, 0, 0, "emptyTile");
+			tile = new LoaderParameters(16 + j*32 , 16 + i*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
 
-			if ((startX > -1 && startX < 15 && startY > -1 && startY < 15)) {
-							drawTile(tile);
+			if ((startX > -1 && startX < map->getWidth() && startY > -1 && startY < map->getHeight())) {
+				//drawTile(tile);
+
+				switch (map->getType(Position(startX, startY)))
+				{
+				case EMPTY:
+					tile->setId("tile_empty");
+					drawTile(tile);
+					break;
+				case GRASS:
+					tile->setId("tile_grass");
+					drawTile(tile);
+					break;
+				case DARKGRASS:
+					tile->setId("tile_darkgrass");
+					drawTile(tile);
+					break;
+				case STONEWALL:
+					tile->setId("tile_stonewall");
+					drawTile(tile);
+					break;
+				}
+
+				// start or end
 				if (map->getEndPosition().x == startX && map->getEndPosition().y == startY)
 				{
-					//tile = new LoaderParameters(16 + j * CELL_SIZE, 16 +  i * CELL_SIZE, CELL_SIZE, CELL_SIZE, 0, 0, "endTile");
-					tile->setId("endTile");
+					tile->setId("misc_end");
 					drawTile(tile);
-				}
-				if (map->getBeginPosition().x == startX && map->getBeginPosition().y == startY)
+				} else if (map->getBeginPosition().x == startX && map->getBeginPosition().y == startY)
 				{
-					tile->setId("beginTile");
+					tile->setId("misc_start");
 					drawTile(tile);
 				}
 
-				if (i == 7 && j == 7) {
-					tile->setId("characterTile");
+				// draw character
+				if (i == 7 && j == 10) {
+					tile->setId("char_default");
 					drawTile(tile);
 				}
 			}
 			startX++;
 		}
-		//cout<<startY<<endl;
 		startY++;
-		startX=map->getCharacterPosition().x - 7;
+		startX = map->getCharacterPosition().x - 10;
 	}
 
 	delete tile;
@@ -85,11 +99,15 @@ void GameEngineMap::draw()
 
 void GameEngineMap::loadTextures()
 {
-	TextureManager::getInstance()->load("images/map-view/empty-tile.png", "emptyTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/character-tile.png", "characterTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/opponent-tile.png", "opponentTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/chest-tile.png", "chestTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/wall-tile.png", "wallTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/begin-tile.png", "beginTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/end-tile.png", "endTile", Game::getInstance()->getRenderer());
+	// tiles
+	TextureManager::getInstance()->load("img/game/tile/tile_empty.png", "tile_empty", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_grass.png", "tile_grass", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_stonewall.png", "tile_stonewall", Game::getInstance()->getRenderer());
+
+	// misc
+	TextureManager::getInstance()->load("img/game/misc/misc_start.png", "misc_start", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/misc/misc_end.png", "misc_end", Game::getInstance()->getRenderer());
+
+	// chars
+	TextureManager::getInstance()->load("img/game/char/char_default.png", "char_default", Game::getInstance()->getRenderer());
 }

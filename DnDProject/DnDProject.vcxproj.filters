@@ -123,6 +123,12 @@
     <ClCompile Include="..\tinyxml\tinyxml2.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -226,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="..\tinyxml\tinyxml2.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

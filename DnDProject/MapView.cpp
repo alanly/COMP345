@@ -10,7 +10,7 @@ MapView::MapView(LoaderParameters* parameters, Map* map) : GameObject(parameters
 
 	// Since the map view size depends on the cell size and how many cells there are, we set the parameters here.
 	this->parameters->setWidth(map->getWidth() * CELL_SIZE);
-	this->parameters->setHeight(map->getBreadth() * CELL_SIZE);
+	this->parameters->setHeight(map->getHeight() * CELL_SIZE);
 
 	loadTextures();
 }
@@ -38,7 +38,7 @@ void MapView::draw()
 {
 	LoaderParameters* tile = nullptr;
 
-	for (int i = 0; i < map->getBreadth(); i++)
+	for (int i = 0; i < map->getHeight(); i++)
 	{
 		for (int j = 0; j < map->getWidth(); j++)
 		{
@@ -46,6 +46,7 @@ void MapView::draw()
 
 			drawTile(tile);
 
+			/*
 			if (map->getEndPosition().x == j && map->getEndPosition().y == i)
 			{
 				tile->setId("endTile");
@@ -56,23 +57,24 @@ void MapView::draw()
 				tile->setId("beginTile");
 				drawTile(tile);
 			}
+			*/
 
-			switch (map->getCellState(Position(j, i)))
+			switch (map->getType(Position(j, i)))
 			{
-			case CHARACTER:
-				tile->setId("characterTile");
+			case EMPTY:
+				tile->setId("tile_empty");
 				drawTile(tile);
 				break;
-			case CHEST:
-				tile->setId("chestTile");
+			case GRASS:
+				tile->setId("tile_grass");
 				drawTile(tile);
 				break;
-			case OPPONENT:
-				tile->setId("opponentTile");
+			case DARKGRASS:
+				tile->setId("tile_darkgrass");
 				drawTile(tile);
 				break;
-			case WALL:
-				tile->setId("wallTile");
+			case STONEWALL:
+				tile->setId("tile_stonewall");
 				drawTile(tile);
 				break;
 			}
@@ -84,11 +86,8 @@ void MapView::draw()
 
 void MapView::loadTextures()
 {
-	TextureManager::getInstance()->load("images/map-view/empty-tile.png", "emptyTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/character-tile.png", "characterTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/opponent-tile.png", "opponentTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/chest-tile.png", "chestTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/wall-tile.png", "wallTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/begin-tile.png", "beginTile", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("images/map-view/end-tile.png", "endTile", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_empty.png", "tile_empty", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_grass.png", "tile_grass", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_darkgrass.png", "tile_darkgrass", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_stonewall.png", "tile_stonewall", Game::getInstance()->getRenderer());
 }

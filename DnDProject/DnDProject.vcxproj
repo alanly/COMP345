@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="..\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="ArmourItem.cpp" />
+    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BeltItem.cpp" />
     <ClCompile Include="BootsItem.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="ShieldItem.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="WeaponItem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +134,7 @@
     <ClInclude Include="SDL_Utilities.h" />
     <ClInclude Include="ShieldItem.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="WeaponItem.h" />
   </ItemGroup>
   <ItemGroup>

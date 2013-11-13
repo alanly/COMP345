@@ -171,7 +171,7 @@ void MapEditor::handleEditorViewEvents()
 	if (mapView->isClicked())
 	{
 		Position clickedPosition(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
-
+		/*
 		CellState nextState;
 
 		switch (map->getCellState(clickedPosition))
@@ -209,9 +209,11 @@ void MapEditor::handleEditorViewEvents()
 		}
 
 		mapView->resetClicked();
+		*/
 	}
 	if (validateMapButton->isClicked())
 	{
+		/*
 		if (map->validate())
 		{
 			validityLbl->getParameters()->setId("validLbl");
@@ -221,6 +223,7 @@ void MapEditor::handleEditorViewEvents()
 			validityLbl->getParameters()->setId("invalidLbl");
 		}
 		validateMapButton->resetClicked();
+		*/
 	}
 	if (saveMapButton->isClicked())
 	{
