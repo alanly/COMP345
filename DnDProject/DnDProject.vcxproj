@@ -71,7 +71,6 @@
   <ItemGroup>
     <ClCompile Include="..\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="ArmourItem.cpp" />
-    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BeltItem.cpp" />
     <ClCompile Include="BootsItem.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -103,6 +102,7 @@
   <ItemGroup>
     <ClInclude Include="..\tinyxml\tinyxml2.h" />
     <ClInclude Include="ArmourItem.h" />
+    <ClInclude Include="AStar.h" />
     <ClInclude Include="BeltItem.h" />
     <ClInclude Include="BootsItem.h" />
     <ClInclude Include="ButtonConstants.h" />

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum Direction {UP, RIGHT, DOWN, LEFT};
+enum Direction {RIGHT, DOWN, LEFT, UP};
 
 class Map
 {
@@ -33,15 +33,19 @@ public:
 	Position getEndPosition();
 
 	Type getType(Position p);
+	void setType(Position p, Type t);
+
+	vector< vector<Tile> > getMap();
 
 	void setCharacterPosition(Position p);
 	void setBeginPosition(Position p);
 	void setEndPosition(Position p);
 
 	void moveCharacter(Direction d);
-	void moveCharacter(Position p);
 
 	bool isValidPosition(const Position& p);
 
 	void createDefaultMap();
+
+	void moveMap(Direction d);
 };

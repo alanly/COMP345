@@ -11,9 +11,9 @@ using namespace std;
 class GameEngineMap : public GameObject
 {
 private:
-	/* Anything smaller than 20 will clip the tiles (note: you have to rebuild the project when you change
-	this value). */
 	static const int CELL_SIZE = 32;
+
+	int mode;
 
 	Map* map;
 	Character* character;
@@ -21,7 +21,7 @@ private:
 	void drawTile(LoaderParameters* tile);
 
 public:
-	GameEngineMap(LoaderParameters* parameters, Map* map, Character* character);
+	GameEngineMap(LoaderParameters* parameters, Map* map, Character* character, int mode);
 	~GameEngineMap();
 
 	// Returns the most recent row and column of the map that was clicked.
@@ -30,5 +30,10 @@ public:
 
 	void draw();
 	void loadTextures();
+
+	int getMode();
+
+	void handleMainEvents();
+
 };
 

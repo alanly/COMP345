@@ -5,9 +5,10 @@
 
 #include <iostream>
 
-
-GameEngineMap::GameEngineMap(LoaderParameters* parameters, Map* map, Character* character) : GameObject(parameters)
+GameEngineMap::GameEngineMap(LoaderParameters* parameters, Map* map, Character* character, int mode) : GameObject(parameters)
 {
+	this->mode = mode;
+
 	this->map = map;
 	this->character = character;
 
@@ -42,11 +43,11 @@ void GameEngineMap::draw()
 
 	int startX = map->getCharacterPosition().x - 10;
 	int startY = map->getCharacterPosition().y - 7;
-	for (int i = 0; i < 15; i++)
+	for (int y = 0; y < 15; y++)
 	{
-		for (int j = 0; j < 21; j++)
+		for (int x = 0; x < 21; x++)
 		{
-			tile = new LoaderParameters(16 + j*32 , 16 + i*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
+			tile = new LoaderParameters(16 + x*32 , 16 + y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
 
 			if ((startX > -1 && startX < map->getWidth() && startY > -1 && startY < map->getHeight())) {
 				//drawTile(tile);
@@ -69,6 +70,10 @@ void GameEngineMap::draw()
 					tile->setId("tile_stonewall");
 					drawTile(tile);
 					break;
+				case WATER:
+					tile->setId("tile_water");
+					drawTile(tile);
+					break;
 				}
 
 				// start or end
@@ -83,7 +88,7 @@ void GameEngineMap::draw()
 				}
 
 				// draw character
-				if (i == 7 && j == 10) {
+				if (y == 7 && x == 10 && mode == 1) {
 					tile->setId("char_default");
 					drawTile(tile);
 				}
@@ -102,7 +107,9 @@ void GameEngineMap::loadTextures()
 	// tiles
 	TextureManager::getInstance()->load("img/game/tile/tile_empty.png", "tile_empty", Game::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("img/game/tile/tile_grass.png", "tile_grass", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_darkgrass.png", "tile_darkgrass", Game::getInstance()->getRenderer());
 	TextureManager::getInstance()->load("img/game/tile/tile_stonewall.png", "tile_stonewall", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/tile/tile_water.png", "tile_water", Game::getInstance()->getRenderer());
 
 	// misc
 	TextureManager::getInstance()->load("img/game/misc/misc_start.png", "misc_start", Game::getInstance()->getRenderer());
@@ -110,4 +117,8 @@ void GameEngineMap::loadTextures()
 
 	// chars
 	TextureManager::getInstance()->load("img/game/char/char_default.png", "char_default", Game::getInstance()->getRenderer());
+}
+
+int GameEngineMap::getMode() {
+	return this->mode;
 }

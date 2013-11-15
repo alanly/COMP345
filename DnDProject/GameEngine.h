@@ -11,6 +11,9 @@ private:
 	enum GameEngineView {MAIN,
 						GAMEOVER};
 
+	bool drawFlag;
+	int drawCount;
+
 	GameObject* gameUI;
 
 	Character* c;

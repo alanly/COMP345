@@ -15,22 +15,22 @@ private:
 
 public:
 	// The width of an extra-small button.
-	static const int XSMALL_WIDTH = 50;
+	static const int XSMALL_WIDTH = 238;
 
 	// The height of an extra-small button.
-	static const int XSMALL_HEIGHT = 40;
+	static const int XSMALL_HEIGHT = 36;
 
 	// The width of a small button.
-	static const int SMALL_WIDTH = 100;
+	static const int SMALL_WIDTH = 238;
 
 	// The height of a small button.
-	static const int SMALL_HEIGHT = 40;
+	static const int SMALL_HEIGHT = 36;
 
 	// The width of a medium button.
-	static const int MEDIUM_WIDTH = 200;
+	static const int MEDIUM_WIDTH = 238;
 
 	// The height of a medium button.
-	static const int MEDIUM_HEIGHT = 40;
+	static const int MEDIUM_HEIGHT = 36;
 
 	// The vertical spacing between buttons.
 	static const int VERTICAL_SPACING = 20;

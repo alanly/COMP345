@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GameObject.h"
-#include "MapView.h"
-
+#include "GameEngineMap.h"
+#include "Character.h"
 
 class MapEditor : public GameObject
 {
@@ -35,7 +35,7 @@ private:
 
 	// Editor view.
 	Map* map;
-	MapView* mapView;
+	GameEngineMap* mapView;
 	GameObject* validateMapButton;
 	GameObject* validityLbl;
 	GameObject* saveMapButton;
@@ -44,6 +44,19 @@ private:
 	vector<GameObject*> saves;
 
 	MapEditorView currentView;
+
+	// tile buttons
+	GameObject* tileEmptyButton;
+	GameObject* tileGrassButton;
+	GameObject* tileDarkGrassButton;
+	GameObject* tileStoneWallButton;
+	GameObject* tileWaterButton;
+
+	Character* character; // dummy char for map movement
+
+	GameObject* editorUI;
+
+	Type currentTile;
 
 public:
 	MapEditor(LoaderParameters* parameters);

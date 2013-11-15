@@ -1,5 +1,7 @@
 #include "Tile.h"
+#include <iostream>
 
+using namespace std;
 Tile::Tile(void)
 {
 	this->type = EMPTY;
@@ -26,8 +28,8 @@ void Tile::setType(Type t)
 
 bool Tile::isWalkable()
 {
-	if (this->type == STONEWALL ||
-		this->type == WATER) {
+	if (getType() == STONEWALL ||
+		getType() == WATER) {
 		return false;
 	} else {
 		return true;
