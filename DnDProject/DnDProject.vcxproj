@@ -89,7 +89,6 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
-    <ClCompile Include="MapView.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="RingItem.cpp" />
     <ClCompile Include="SDL_Utilities.cpp" />

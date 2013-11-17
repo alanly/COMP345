@@ -47,9 +47,8 @@ void GameEngineMap::draw()
 	{
 		for (int x = 0; x < 21; x++)
 		{
-			tile = new LoaderParameters(16 + x*32 , 16 + y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
-
 			if ((startX > -1 && startX < map->getWidth() && startY > -1 && startY < map->getHeight())) {
+				tile = new LoaderParameters(16 + x*32 , 16 + y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
 				//drawTile(tile);
 
 				switch (map->getType(Position(startX, startY)))
@@ -100,6 +99,20 @@ void GameEngineMap::draw()
 	}
 
 	delete tile;
+
+	for (int i = 0; i < map->getMonsters().size(); i++)
+	{
+		if(map->getMonsters()[i].getPosition().x > map->getCharacterPosition().x - 10
+			&& map->getMonsters()[i].getPosition().x < map->getCharacterPosition().x + 10
+			&& map->getMonsters()[i].getPosition().y > map->getCharacterPosition().y - 7
+			&& map->getMonsters()[i].getPosition().y < map->getCharacterPosition().y + 7)
+		{
+			tile = new LoaderParameters(16 + map->getMonsters()[i].getPosition().x*32 , 
+				16 + map->getMonsters()[i].getPosition().y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
+			drawTile(tile);
+		}
+	}
+
 }
 
 void GameEngineMap::loadTextures()

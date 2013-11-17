@@ -5,6 +5,9 @@
 #include "Container.h"
 #include "Position.h"
 #include "Tile.h"
+#include "Monster.h"
+
+#include "tinyxml2.h"
 
 using namespace std;
 
@@ -14,7 +17,7 @@ class Map
 {
 private:
 	vector< vector<Tile> > map;
-	vector< vector<Container> > chests;
+	vector<Monster> monsters;
 
 	Position characterPosition;
 	Position beginPosition;
@@ -48,4 +51,12 @@ public:
 	void createDefaultMap();
 
 	void moveMap(Direction d);
+
+	void spawnMonster(Monster m);
+
+	vector<Monster> getMonsters();
+
+	// load save functions
+	void saveToFile(string fn);
+	static Map* readFromFile(string filename);
 };

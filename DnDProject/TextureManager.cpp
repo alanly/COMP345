@@ -46,7 +46,7 @@ bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message)
 	TTF_Init();
 	TTF_Font *font = TTF_OpenFont("res/GillSansMTPro-Book.otf", 18);
 	
-	SDL_Color color = {255,0,0};		
+	SDL_Color color = {255, 255, 255};		
 	SDL_Surface *surface = TTF_RenderText_Blended(font, message.c_str(), color);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 

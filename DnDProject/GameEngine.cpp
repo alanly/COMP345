@@ -40,7 +40,7 @@ void GameEngine::handleMainEvents()
 
 		string s = pathFind(map->getMap(), map->getCharacterPosition().x, map->getCharacterPosition().y, click.x, click.y);
 
-		cout<<s<<endl;
+		//cout<<s<<endl;
 
 		while (s.length() != 0) {
 			SDL_RenderClear(Game::getInstance()->getRenderer());

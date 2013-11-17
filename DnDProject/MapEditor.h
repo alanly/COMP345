@@ -8,39 +8,28 @@ class MapEditor : public GameObject
 {
 private:
 	enum MapEditorView {ENTRY,
-					EDITOR,
 					MAP_SIZE,
+					EDITOR,
 					SAVE,
 					LOAD};
 
-	// Predefined map sizes.
-	static const int SMALL_MAP_BREADTH = 7;
-	static const int SMALL_MAP_WIDTH = 7;
-	static const int MEDIUM_MAP_BREADTH = 8;
-	static const int MEDIUM_MAP_WIDTH = 10;
-	static const int LARGE_MAP_BREADTH = 11;
-	static const int LARGE_MAP_WIDTH = 13;
-
-	// This button lets you go back to the main menu.
 	GameObject* mainMenuButton;
 
-	// Entry view.
+	// Entry view
 	GameObject* newMapButton;
 	GameObject* loadMapButton;
 
-	// Map size view.
+	// Map size view
 	GameObject* smallMapButton;
 	GameObject* mediumMapButton;
 	GameObject* largeMapButton;
 
-	// Editor view.
+	// Editor view
 	Map* map;
 	GameEngineMap* mapView;
-	GameObject* validateMapButton;
-	GameObject* validityLbl;
 	GameObject* saveMapButton;
 
-	// Load view.
+	// Load view
 	vector<GameObject*> saves;
 
 	MapEditorView currentView;

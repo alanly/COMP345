@@ -3,32 +3,17 @@
 #include "ButtonConstants.h"
 #include "Game.h"
 
-void MainMenu::determineEntryViewButtonPositions(int *initialX, int *initialY)
-{
-	// Determine the layout of buttons for the entry view
-	*initialX = (Game::getInstance()->getWindowWidth() / 2) - (ButtonConstants::MEDIUM_WIDTH / 2);
-	*initialY = (Game::getInstance()->getWindowHeight() / 2)
-		+ (Game::getInstance()->getWindowHeight() / 2)/2
-		- (ButtonConstants::MEDIUM_HEIGHT * 3 + ButtonConstants::VERTICAL_SPACING*2)/2;
-}
-
 MainMenu::MainMenu(LoaderParameters* parameters) : GameObject(parameters)
 {
-	// Determine the layout of buttons.
-	int initialX = 0;
-	int initialY = 0;
-	determineEntryViewButtonPositions(&initialX, &initialY);
 
-	playGameButton = new GameObject(new LoaderParameters(initialX, initialY, 238, 36, 0, 0, "playGameButton"));
-	mapEditorButton = new GameObject(new LoaderParameters(initialX, initialY + ButtonConstants::MEDIUM_HEIGHT + ButtonConstants::VERTICAL_SPACING, 238, 36, 0, 0, "mapEditorButton"));
-	quitButton = new GameObject(new LoaderParameters(initialX, initialY + ButtonConstants::MEDIUM_HEIGHT*2 + ButtonConstants::VERTICAL_SPACING*2, 238, 36, 0, 0, "quitButton"));
+	playGameButton = new GameObject(new LoaderParameters(0, 0, 238, 36, 0, 0, "playGameButton"));
+	mapEditorButton = new GameObject(new LoaderParameters(0, 37, 238, 36, 0, 0, "mapEditorButton"));
+	quitButton = new GameObject(new LoaderParameters(0, 74, 238, 36, 0, 0, "quitButton"));
 
 	loadTextures();
 }
 
-MainMenu::~MainMenu()
-{
-}
+MainMenu::~MainMenu() { }
 
 void MainMenu::draw()
 {
