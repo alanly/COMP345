@@ -39,14 +39,14 @@ bool TextureManager::load(const string &fileName, string id, SDL_Renderer* rende
 
 	return false;
 }
+
 bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message) 
 {
 	if (message == "") message = " ";
 
 	TTF_Init();
-	TTF_Font *font = TTF_OpenFont("res/GillSansMTPro-Book.otf", 18);
-	
-	SDL_Color color = {255, 255, 255};		
+	TTF_Font *font = TTF_OpenFont("res/english_111_adagio_bt.ttf", 24);
+	SDL_Color color = {0, 0, 0};		
 	SDL_Surface *surface = TTF_RenderText_Blended(font, message.c_str(), color);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -60,6 +60,28 @@ bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message)
 	}
 	return false;
 }
+
+bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message, int size) 
+{
+	if (message == "") message = " ";
+
+	TTF_Init();
+	TTF_Font *font = TTF_OpenFont("res/english_111_adagio_bt.ttf", size);
+	SDL_Color color = {0, 0, 0};		
+	SDL_Surface *surface = TTF_RenderText_Blended(font, message.c_str(), color);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+	TTF_CloseFont(font);
+	SDL_FreeSurface(surface);
+
+	if(texture != 0)
+	{
+		textureMap[id + std::string("_font")] = texture;
+		return true;
+	}
+	return false;
+}
+
 TextureManager* TextureManager::getInstance()
 {
 	if (instance == nullptr)

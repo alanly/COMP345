@@ -30,7 +30,7 @@ void Map::createDefaultMap() {
 	this->map[2][3].setType(STONEWALL);
 	this->map[3][3].setType(STONEWALL);
 
-	spawnMonster(Monster("Negro Demon", 1, "Big Black Demon", 666, Position(7, 7)));
+	spawnMonster(Monster("Negro Demon", 1, "Big Black Demon", 666, Position(5, 5)));
 
 }
 
@@ -131,20 +131,28 @@ vector< vector<Tile> > Map::getMap() {
 }
 
 
-void Map::saveToFile(string fn){	using namespace tinyxml2;
+void Map::saveToFile(string fn)
+{
+	using namespace tinyxml2;
+
 	vector< vector<Tile> > map = this->map;
 	Position charPosition = this->characterPosition;
 	Position bPosition = this->beginPosition;
-	Position ePosition = this->endPosition;
-	int x, y;
-	Type tile;
+	Position ePosition = this->endPosition;
+
+	int x, y;
+
+	Type tile;
+
 	XMLDocument doc;
 	XMLNode* mapNode =  doc.NewElement("Map");
 	XMLNode* tileNode;
 	XMLText* tileType;
 
-	string convert;
-	const char* c;
+	string convert;
+
+	const char* c;
+
 	// Character Position
 	XMLNode* positionNode = doc.NewElement("CharacterPosition");
 	x = charPosition.x;
@@ -159,7 +167,8 @@ void Map::saveToFile(string fn){	using namespace tinyxml2;
 	yPosition->InsertEndChild(yText);
 	positionNode->InsertEndChild(xPosition);
 	positionNode->InsertEndChild(yPosition);
-	doc.InsertEndChild(positionNode);
+	doc.InsertEndChild(positionNode);
+
 	// Begin Position
 	positionNode = doc.NewElement("BeginPosition");
 	x = bPosition.x;
@@ -174,7 +183,8 @@ void Map::saveToFile(string fn){	using namespace tinyxml2;
 	yPosition->InsertEndChild(yText);
 	positionNode->InsertEndChild(xPosition);
 	positionNode->InsertEndChild(yPosition);
-	doc.InsertEndChild(positionNode);
+	doc.InsertEndChild(positionNode);
+
 	// End Position
 	positionNode = doc.NewElement("EndPosition");
 	x = ePosition.x;
@@ -189,22 +199,27 @@ void Map::saveToFile(string fn){	using namespace tinyxml2;
 	yPosition->InsertEndChild(yText);
 	positionNode->InsertEndChild(xPosition);
 	positionNode->InsertEndChild(yPosition);
-	doc.InsertEndChild(positionNode);
+	doc.InsertEndChild(positionNode);
+
 	// Tile info
 	for (int col = 0; col < map.size(); col++)
 	{
 		for (int row = 0; row < map[col].size(); row++)
 		{
-			tileNode = doc.NewElement("Tile");
-			tile = map.at(col).at(row).getType();
+			tileNode = doc.NewElement("Tile");
+
+			tile = map.at(col).at(row).getType();
+
 			convert = to_string(tile);
 			c = convert.c_str();
 
 			tileType = doc.NewText(c);
-			tileNode->InsertEndChild(tileType);
+			tileNode->InsertEndChild(tileType);
+
 			mapNode->InsertEndChild(tileNode);
 		}
-	}
+	}
+
 	doc.InsertEndChild(mapNode);
 
 	fn = "sav\\map\\" + fn;
@@ -212,24 +227,36 @@ void Map::saveToFile(string fn){	using namespace tinyxml2;
 	const char* f = fn.c_str();
 	doc.SaveFile(f);
 	cout<<"Saved map to file "<<f;
-}
-Map* Map::readFromFile(string filename){	using namespace tinyxml2;
+}
+
+Map* Map::readFromFile(string filename)
+{
+	using namespace tinyxml2;
 
 	filename = "sav\\map\\" + filename;
-	const char* f = filename.c_str();
+	const char* f = filename.c_str();
+
 	XMLDocument doc;
-	doc.LoadFile(f);
-	int numberOfTiles = 0;
+	doc.LoadFile(f);
+
+	int numberOfTiles = 0;
+
 	string line;
-	ifstream myfile(filename,ifstream::in);
+	ifstream myfile(filename,ifstream::in);
+
 	while (getline(myfile,line))
 	{
 		numberOfTiles++;
-	}
-	numberOfTiles = numberOfTiles - 17; // Accounts for tags that are not tiles
-	int n = static_cast<int>(sqrt(numberOfTiles)); // n x n map
-	int x,y;
-	Type tileType;
+	}
+
+	numberOfTiles = numberOfTiles - 17; // Accounts for tags that are not tiles
+
+	int n = static_cast<int>(sqrt(numberOfTiles)); // n x n map
+
+	int x,y;
+
+	Type tileType;
+
 	XMLElement* tileNode;
 
 	// Character Position
@@ -238,25 +265,29 @@ Map* Map::readFromFile(string filename){	using namespace tinyxml2;
 	XMLElement* yPositionNode = topChildLevel->FirstChildElement("y");
 	x = stoi(xPositionNode->GetText());
 	y = stoi(yPositionNode->GetText());
-	Position charPosition(x,y);
+	Position charPosition(x,y);
+
 	// Begin Position
 	topChildLevel = topChildLevel->NextSiblingElement();
 	xPositionNode = topChildLevel->FirstChildElement("x");
 	yPositionNode = topChildLevel->FirstChildElement("y");
 	x = stoi(xPositionNode->GetText());
 	y = stoi(yPositionNode->GetText());
-	Position bPosition(x,y);
+	Position bPosition(x,y);
+
 	//End Position
 	topChildLevel = topChildLevel->NextSiblingElement();
 	xPositionNode = topChildLevel->FirstChildElement("x");
 	yPositionNode = topChildLevel->FirstChildElement("y");
 	x = stoi(xPositionNode->GetText());
-	y = stoi(yPositionNode->GetText());
+	y = stoi(yPositionNode->GetText());
+
 	Position ePosition(x,y);
 	Map* map = new Map(n, n, bPosition, ePosition);
 	map->setCharacterPosition(charPosition);
 	topChildLevel = topChildLevel->NextSiblingElement();
-	tileNode = topChildLevel->FirstChildElement("Tile");
+	tileNode = topChildLevel->FirstChildElement("Tile");
+
 	for (int col = 0; col < n; col++)
 	{
 		for (int row = 0; row < n; row++)
@@ -266,6 +297,7 @@ Map* Map::readFromFile(string filename){	using namespace tinyxml2;
 			map->setType(currentCell, tileType);
 			tileNode = tileNode->NextSiblingElement();
 		}
-	}
+	}
+
 	return map;
 }

@@ -1,10 +1,6 @@
-#pragma once
-
-#include <iostream>
-
+//#include <iostream>
 #include "MapEditor.h"
 #include "TextureManager.h"
-#include "ButtonConstants.h"
 #include "dirent.h"
 #include "Game.h"
 #include "InputHandler.h"
@@ -14,17 +10,19 @@ MapEditor::MapEditor(LoaderParameters* parameters) : GameObject(parameters)
 {
 	currentView = MapEditorView::ENTRY;
 	currentTile = EMPTY;
-	editorUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "editorUI"));
 
-	newMapButton = new GameObject(new LoaderParameters(150, 400, 238, 36, 0, 0, "newMapButton"));
-	loadMapButton = new GameObject(new LoaderParameters(150, 450, 238, 36, 0, 0, "loadMapButton"));
-	mainMenuButton = new GameObject(new LoaderParameters(150, 500, 238, 36, 0, 0, "mainMenuButton"));
+	UI_Editor = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "UI_Editor"));
 
-	smallMapButton = new GameObject(new LoaderParameters(150, 350, 238, 36, 0, 0, "smallMapButton"));
-	mediumMapButton = new GameObject(new LoaderParameters(150, 400, 238, 36, 0, 0, "mediumMapButton"));
-	largeMapButton = new GameObject(new LoaderParameters(150, 450, 238, 36, 0, 0, "largeMapButton"));
+	Button_Map_New = new GameObject(new LoaderParameters(80, 200, 180, 50, 0, 0, "Button_Map_New"));
+	Button_Map_Load = new GameObject(new LoaderParameters(100, 250, 190, 48, 0, 0, "Button_Map_Load"));
+	Button_Back = new GameObject(new LoaderParameters(0, 0, 96, 38, 0, 0, "Button_Back"));
 
-	saveMapButton = new GameObject(new LoaderParameters(705, 536, 238, 36, 0, 0, "saveMapButton"));
+	Button_Map_Small = new GameObject(new LoaderParameters(80, 200, 104, 38, 0, 0, "Button_Map_Small"));
+	Button_Map_Medium = new GameObject(new LoaderParameters(100, 250, 144, 36, 0, 0, "Button_Map_Medium"));
+	Button_Map_Large = new GameObject(new LoaderParameters(120, 300, 104, 52, 0, 0, "Button_Map_Large"));
+
+	Button_Save_Map = new GameObject(new LoaderParameters(705, 536, 238, 36, 0, 0, "Button_Save_Map"));
+	Button_Main_Menu = new GameObject(new LoaderParameters(705, 573, 238, 36, 0, 0, "Button_Main_Menu"));
 
 	tileEmptyButton = new GameObject(new LoaderParameters(705, 17, 32, 32, 0, 0, "tileEmptyButton"));
 	tileGrassButton = new GameObject(new LoaderParameters(738, 17, 32, 32, 0, 0, "tileGrassButton"));
@@ -42,39 +40,39 @@ MapEditor::~MapEditor()
 
 void MapEditor::drawEntryView()
 {
-	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "createMapUI"), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "UI_Create_Map"), Game::getInstance()->getRenderer());
 
-	newMapButton->draw();
-	loadMapButton->draw();
+	Button_Map_New->draw();
+	Button_Map_Load->draw();
 
-	mainMenuButton->getParameters()->setXPos(150);
-	mainMenuButton->getParameters()->setYPos(500);
-	mainMenuButton->draw();
+	Button_Back->getParameters()->setXPos(120);
+	Button_Back->getParameters()->setYPos(300);
+	Button_Back->draw();
 }
 
 void MapEditor::drawMapSizeView()
 {
-	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "createMapUI"), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "UI_Create_Map"), Game::getInstance()->getRenderer());
 
-	smallMapButton->draw();
-	mediumMapButton->draw();
-	largeMapButton->draw();
+	Button_Map_Small->draw();
+	Button_Map_Medium->draw();
+	Button_Map_Large->draw();
 
-	mainMenuButton->getParameters()->setXPos(150);
-	mainMenuButton->getParameters()->setYPos(500);
-	mainMenuButton->draw();
+	Button_Back->getParameters()->setXPos(140);
+	Button_Back->getParameters()->setYPos(350);
+	Button_Back->draw();
 }
 
 void MapEditor::drawEditorView()
 {
-	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "gameUI"), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "UI_Editor"), Game::getInstance()->getRenderer());
 
 	mapView->draw();
-	saveMapButton->draw();
+	Button_Save_Map->draw();
 
-	mainMenuButton->getParameters()->setXPos(705);
-	mainMenuButton->getParameters()->setYPos(586);
-	mainMenuButton->draw();
+	//Button_Back->getParameters()->setXPos(705);
+	//Button_Back->getParameters()->setYPos(586);
+	Button_Main_Menu->draw();
 
 	// draw tiles in the right pane
 	tileEmptyButton->draw();
@@ -85,25 +83,35 @@ void MapEditor::drawEditorView()
 }
 
 void MapEditor::drawSaveView()
-{}
+{
+}
 
 void MapEditor::drawLoadView()
 {
+	TextureManager::getInstance()->draw(new LoaderParameters(0, 0, Game::getInstance()->getWindowWidth(), Game::getInstance()->getWindowHeight(), 0, 0, "UI_Load_Map"), Game::getInstance()->getRenderer());
+
+	Button_Back->getParameters()->setXPos(210);
+	Button_Back->getParameters()->setYPos(450);
+	Button_Back->draw();
+
 	string curr_directory = "sav\\map\\";
 	string extension = "xml";
+
 	if(saves.empty()){
-		int currentX = 100;
-		int currentY = 100;
-		int increment = 35;
+		int currentX = 60;
+		int currentY = 200;
+		int incrementX = 10;
+		int incrementY = 35;
 		DIR* dir_point = opendir(curr_directory.c_str());
         dirent* entry = readdir(dir_point);
-        while (entry){                       // if !entry then end of directory
-               if (entry->d_type == DT_REG){                // if entry is a regular file
-                   std::string fname = entry->d_name;        // filename
-                                                                                                // if filename's last characters are extension
+        while (entry) { // if !entry then end of directory
+               if (entry->d_type == DT_REG) { // if entry is a regular file
+                   std::string fname = entry->d_name; // filename
+                   // if filename's last characters are extension
                    if (fname.find(extension, (fname.length() - extension.length())) != std::string::npos){
-					   saves.push_back(new GameObject(new LoaderParameters(currentX,currentY,150,25,0,0,fname)));             // add filename to results vector
-					   currentY += increment;
+					   saves.push_back(new GameObject(new LoaderParameters(currentX, currentY, 300, 25, 0, 0, fname.substr(0, fname.length()-4))));
+					   currentY += incrementY;
+					   currentX += incrementX;
 				   }
                 }
                 entry = readdir(dir_point);
@@ -137,18 +145,18 @@ void MapEditor::drawSaveFiles()
 
 void MapEditor::handleEntryViewEvents()
 {
-	newMapButton->handleEvents();
-	loadMapButton->handleEvents();
+	Button_Map_New->handleEvents();
+	Button_Map_Load->handleEvents();
 
-	if (newMapButton->isClicked())
+	if (Button_Map_New->isClicked())
 	{
 		currentView = MapEditorView::MAP_SIZE;
-		newMapButton->resetClicked();
+		Button_Map_New->resetClicked();
 	}
-	if (loadMapButton->isClicked())
+	if (Button_Map_Load->isClicked())
 	{
 		currentView = MapEditorView::LOAD;
-		loadMapButton->resetClicked();
+		Button_Map_Load->resetClicked();
 	}
 }
 
@@ -167,8 +175,8 @@ void MapEditor::handleEditorViewEvents()
 		}
 	}
 
-	editorUI->handleEvents();
-	if (editorUI->isClicked())
+	UI_Editor->handleEvents();
+	if (UI_Editor->isClicked())
 	{
 		Position click(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
 		//currentTile = EMPTY;
@@ -205,45 +213,53 @@ void MapEditor::handleEditorViewEvents()
 		}
 	}
 
-	saveMapButton->handleEvents();
-	if (saveMapButton->isClicked())
+	Button_Save_Map->handleEvents();
+	if (Button_Save_Map->isClicked())
 	{
 		map->saveToFile("testmap.xml");
-		saveMapButton->resetClicked();
+		Button_Save_Map->resetClicked();
 	}
 
-	editorUI->resetClicked();
+	Button_Main_Menu->handleEvents();
+	if (Button_Main_Menu->isClicked())
+	{
+		Game::getInstance()->setCurrentView(enumUtility::gameView::Main_Menu);
+		currentView = MapEditorView::ENTRY;
+		Button_Main_Menu->resetClicked();
+	}
+
+	UI_Editor->resetClicked();
 }
 
 void MapEditor::handleMapSizeViewEvents()
 {
-	smallMapButton->handleEvents();
-	mediumMapButton->handleEvents();
-	largeMapButton->handleEvents();
+	Button_Map_Small->handleEvents();
+	Button_Map_Medium->handleEvents();
+	Button_Map_Large->handleEvents();
 
-	if (smallMapButton->isClicked())
+	if (Button_Map_Small->isClicked())
 	{
 		character = new Character("MAPEDIT", 1);
 		map = new Map(10, 10, Position(0, 0), Position(5, 5));
 		mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "mapView"), map, character, 0);
 		currentView = MapEditorView::EDITOR;
-		smallMapButton->resetClicked();
+		Button_Map_Small->resetClicked();
 	}
-	if (mediumMapButton->isClicked())
+	if (Button_Map_Medium->isClicked())
 	{
 		character = new Character("MAPEDIT", 1);
 		map = new Map(30, 30, Position(0, 0), Position(30 - 1, 30 - 1));
 		mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "mapView"), map, character, 0);
 		currentView = MapEditorView::EDITOR;
-		mediumMapButton->resetClicked();
+		Button_Map_Medium->resetClicked();
 	}
-	if (largeMapButton->isClicked())
+	if (Button_Map_Large->isClicked())
 	{
 		character = new Character("MAPEDIT", 1);
 		map = new Map(100, 100, Position(0, 0), Position(100 - 1, 100 - 1));
 		mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "mapView"), map, character, 0);
 		currentView = MapEditorView::EDITOR;
-		largeMapButton->resetClicked();
+		Button_Map_Large->resetClicked();
 	}
 }
 
@@ -269,7 +285,7 @@ void MapEditor::handleLoadViewEvents()
 }
 
 void MapEditor::draw() {
-	mainMenuButton->draw();
+	Button_Back->draw();
 
 	switch (currentView)
 	{
@@ -286,20 +302,34 @@ void MapEditor::draw() {
 		drawLoadView();
 		break;
 	}
-	
 }
 
 void MapEditor::handleEvents() {
-	// Handle if the main menu button was clicked.
-	mainMenuButton->handleEvents();
+	Button_Back->handleEvents();
 
-	if (mainMenuButton->isClicked())
+	if (Button_Back->isClicked())
 	{
-		Game::getInstance()->setCurrentView(enumUtility::gameView::Main_Menu);
-		currentView = MapEditorView::ENTRY;
-		mainMenuButton->resetClicked();
+		switch (currentView)
+		{
+		case MapEditorView::ENTRY:
+			Game::getInstance()->setCurrentView(enumUtility::gameView::Main_Menu);
+			currentView = MapEditorView::ENTRY;
+			break;
+		case MapEditorView::MAP_SIZE:
+			currentView = MapEditorView::ENTRY;
+			break;
+		case MapEditorView::EDITOR:
+			Game::getInstance()->setCurrentView(enumUtility::gameView::Main_Menu);
+			currentView = MapEditorView::ENTRY;
+			break;
+		case MapEditor::LOAD:
+			currentView = MapEditorView::ENTRY;
+			break;
+		}
+		Button_Back->resetClicked();
 	}
-	else {
+	else
+	{
 		switch (currentView)
 		{
 		case MapEditorView::ENTRY:
@@ -319,19 +349,21 @@ void MapEditor::handleEvents() {
 }
 
 void MapEditor::loadTextures() {
-	TextureManager::getInstance()->load("img/game/btn/btn_main_menu.png", mainMenuButton->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_back.png", Button_Back->getParameters()->getId(), Game::getInstance()->getRenderer());
 
-	TextureManager::getInstance()->load("img/game/btn/btn_new_map.png", newMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("img/game/btn/btn_load_map.png", loadMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_map_new.png", Button_Map_New->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_map_load.png", Button_Map_Load->getParameters()->getId(), Game::getInstance()->getRenderer());
 
-	TextureManager::getInstance()->load("img/game/btn/btn_small_map.png", smallMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("img/game/btn/btn_medium_map.png", mediumMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("img/game/btn/btn_large_map.png", largeMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_map_small.png", Button_Map_Small->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_map_medium.png", Button_Map_Medium->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_map_large.png", Button_Map_Large->getParameters()->getId(), Game::getInstance()->getRenderer());
 	
-	TextureManager::getInstance()->load("img/game/btn/btn_save_map.png", saveMapButton->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_save_map.png", Button_Save_Map->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/btn/btn_main_menu.png", Button_Main_Menu->getParameters()->getId(), Game::getInstance()->getRenderer());
 
-	TextureManager::getInstance()->load("img/game/ui/create_map.png", "createMapUI", Game::getInstance()->getRenderer());
-	TextureManager::getInstance()->load("img/game/ui/game_ui.png", "gameUI", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/ui/map_create.png", "UI_Create_Map", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/ui/map_load.png", "UI_Load_Map", Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/ui/game_ui.png", "UI_Editor", Game::getInstance()->getRenderer());
 
 	// this is duplicated from GameEngineMap.cpp, probably make a method for this somewhere
 	// this is needed for the tiles view on the side

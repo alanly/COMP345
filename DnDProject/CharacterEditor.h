@@ -9,11 +9,14 @@ private:
 	enum CharacterEditorView {ENTRY,
 					EDITOR,
 					SAVE,
-					LOAD};
-	GameObject* mainMenuButton;
-	GameObject* newCharacterButton;
-	GameObject* loadCharacterButton;
+					LOAD,
+					MAP};
 
+	GameObject* Button_Back;
+	GameObject* Button_Char_New;
+	GameObject* Button_Char_Load;
+
+	GameObject* Button_Char_Play;
 
 	GameObject* strengthText;
 	GameObject* dexterityText;
@@ -33,7 +36,9 @@ private:
 	GameObject* characterClassification;
 	GameObject* changeClassificationButton;
 	GameObject* rollButton;
-	GameObject* saveCharacterButton;
+
+	GameObject* Char_Portrait;
+
 	GameObject* playerNameInput;
 	bool gotIt;
 	CharacterEditorView  currentView;

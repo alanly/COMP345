@@ -13,28 +13,25 @@ private:
 					SAVE,
 					LOAD};
 
-	GameObject* mainMenuButton;
+	GameObject* Button_Back;
 
-	// Entry view
-	GameObject* newMapButton;
-	GameObject* loadMapButton;
+	GameObject* Button_Map_New;
+	GameObject* Button_Map_Load;
 
-	// Map size view
-	GameObject* smallMapButton;
-	GameObject* mediumMapButton;
-	GameObject* largeMapButton;
+	GameObject* Button_Map_Small;
+	GameObject* Button_Map_Medium;
+	GameObject* Button_Map_Large;
 
-	// Editor view
+	GameObject* Button_Save_Map;
+	GameObject* Button_Main_Menu;
+
 	Map* map;
 	GameEngineMap* mapView;
-	GameObject* saveMapButton;
 
-	// Load view
 	vector<GameObject*> saves;
 
 	MapEditorView currentView;
 
-	// tile buttons
 	GameObject* tileEmptyButton;
 	GameObject* tileGrassButton;
 	GameObject* tileDarkGrassButton;
@@ -43,7 +40,7 @@ private:
 
 	Character* character; // dummy char for map movement
 
-	GameObject* editorUI;
+	GameObject* UI_Editor;
 
 	Type currentTile;
 
@@ -51,7 +48,6 @@ public:
 	MapEditor(LoaderParameters* parameters);
 	~MapEditor();
 
-	// These are functions used for the load map view.
 	void loadSaveFiles();
 	void drawSaveFiles();
 

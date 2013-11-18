@@ -649,7 +649,7 @@ void Character::saveToFile()
 	string sYear = to_string(year);
 	string sMonth = to_string(month);
 	string sDay = to_string(day);
-	string date = "saves\\character\\" + this->getName() + "_" + sYear + "_" + sMonth + "_" + sDay + ".xml";
+	string date = "sav\\char\\" + this->getName() + "_" + sYear + "_" + sMonth + "_" + sDay + ".xml";
 	const char* filename =  date.c_str();
 	
 	doc.SaveFile(filename);

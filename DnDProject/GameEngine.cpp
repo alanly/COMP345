@@ -12,7 +12,7 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gameUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameUI"));
 	c = new Character("Player", 1);
-	map = new Map(7, 10, Position(1, 1), Position(5, 1));
+	map = new Map(20, 20, Position(1, 1), Position(5, 1));
 	mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "gameEngineMap"), map, c, 1);
 	currentView = GameEngineView::MAIN;
 
@@ -44,6 +44,7 @@ void GameEngine::handleMainEvents()
 
 		while (s.length() != 0) {
 			SDL_RenderClear(Game::getInstance()->getRenderer());
+
 			map->moveCharacter((Direction)(s.front() - '0'));
 			gameUI->draw();
 			mapView->draw();

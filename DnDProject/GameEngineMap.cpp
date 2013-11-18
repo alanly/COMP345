@@ -48,7 +48,7 @@ void GameEngineMap::draw()
 		for (int x = 0; x < 21; x++)
 		{
 			if ((startX > -1 && startX < map->getWidth() && startY > -1 && startY < map->getHeight())) {
-				tile = new LoaderParameters(16 + x*32 , 16 + y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
+				tile = new LoaderParameters(16 + x*32, 16 + y*32, CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
 				//drawTile(tile);
 
 				switch (map->getType(Position(startX, startY)))
@@ -98,21 +98,15 @@ void GameEngineMap::draw()
 		startX = map->getCharacterPosition().x - 10;
 	}
 
-	delete tile;
-
+	// draw monsterz
 	for (int i = 0; i < map->getMonsters().size(); i++)
 	{
-		if(map->getMonsters()[i].getPosition().x > map->getCharacterPosition().x - 10
-			&& map->getMonsters()[i].getPosition().x < map->getCharacterPosition().x + 10
-			&& map->getMonsters()[i].getPosition().y > map->getCharacterPosition().y - 7
-			&& map->getMonsters()[i].getPosition().y < map->getCharacterPosition().y + 7)
-		{
-			tile = new LoaderParameters(16 + map->getMonsters()[i].getPosition().x*32 , 
-				16 + map->getMonsters()[i].getPosition().y*32 , CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
-			drawTile(tile);
-		}
+		tile = new LoaderParameters(16 + (-(map->getCharacterPosition().x - 10)+map->getMonsters()[i].getPosition().x)*32, 
+			16 + (-(map->getCharacterPosition().y - 7)+map->getMonsters()[i].getPosition().y)*32, CELL_SIZE, CELL_SIZE, 0, 0, "mnstr_skeletor");
+		drawTile(tile);
 	}
-
+	
+	delete tile;
 }
 
 void GameEngineMap::loadTextures()
@@ -130,6 +124,9 @@ void GameEngineMap::loadTextures()
 
 	// chars
 	TextureManager::getInstance()->load("img/game/char/char_default.png", "char_default", Game::getInstance()->getRenderer());
+
+	// monsters
+	TextureManager::getInstance()->load("img/game/mnstr/mnstr_skeletor.png", "mnstr_skeletor", Game::getInstance()->getRenderer());
 }
 
 int GameEngineMap::getMode() {
