@@ -25,7 +25,7 @@ class Character : public Entity
 		RingItem *ring2;
 		BootsItem *boots;
 		BeltItem *belt;
-		//XMLHandle* convertItemToXML(Item* item,XMLNode* itemNode);
+		
 	public:
 		Character(string, int);
 		Character(string, int, enumUtility::characterClassifiction);
@@ -54,6 +54,6 @@ class Character : public Entity
 		void setBelt(BeltItem* belt);
 		void setClassification(enumUtility::characterClassifiction);
 		void saveToFile();
-		void readFromFile(string filename);
+		static Character* readFromFile(string filename);
 };
 

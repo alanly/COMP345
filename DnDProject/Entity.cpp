@@ -113,3 +113,33 @@ void Entity::setName(string name)
 {
 	this->name = name;
 }
+
+void Entity::setStrength(int strength)
+{
+	this->stats[enumUtility::Strength] = strength;
+}
+
+void Entity::setDexterity(int dexterity)
+{
+	this->stats[enumUtility::Dexterity] = dexterity;
+}
+
+void Entity::setCharisma(int charisma)
+{
+	this->stats[enumUtility::Charisma] = charisma;
+}
+
+void Entity::setIntelligence(int intelligence)
+{
+	this->stats[enumUtility::Inteligence] = intelligence;
+}
+
+void Entity::setConstitution(int constitution)
+{
+	this->stats[enumUtility::Constitution] = constitution;
+}
+
+void Entity::setWisdom(int wisdom)
+{
+	this->stats[enumUtility::Wisdom] = wisdom;
+}

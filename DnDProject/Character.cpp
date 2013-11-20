@@ -1,9 +1,11 @@
 #include "Character.h"
 #include <sstream>
+#include <fstream>
+#include <iostream>
 #include <ctime>
 #include <string>
 #include <string.h>
-#include <iostream>
+
 
 using namespace std;
 
@@ -124,30 +126,89 @@ void Character::saveToFile()
 	BootsItem *boots = this->boots;
 	BeltItem *belt = this->belt;
 
+	string strength = to_string(this->getStrength());
+	string dexterity = to_string(this->getDexterity());
+	string charisma = to_string(this->getCharisma());
+	string intelligence = to_string(this->getInteligence());
+	string constitution = to_string(this->getConstitution());
+	string wisdom = to_string(this->getWisdom());
+	string armorClass = to_string(this->getArmorClass());
+	string damageBonus = to_string(this->getDamageBonus());
+	string attackBonus = to_string(this->getAttackBonus());
+
 	XMLDocument doc;
 	XMLNode *characterNode = doc.NewElement("Character");
 
 	XMLNode *nameNode = doc.NewElement("Name");
 	const char* c = charName.c_str();
 	XMLText *nameText = doc.NewText(c);
+	nameNode->InsertEndChild(nameText);
 
-	XMLNode *currentExpNode = doc.NewElement("Current Experience");
-	string convert = to_string(this->currentExp);
+	XMLNode *characterClassNode = doc.NewElement("CharacterClass");
+	int classification = static_cast<int>(this->classification);
+	string convert = to_string(classification);
+	c = convert.c_str();
+	XMLText *characterClassText = doc.NewText(c);
+	characterClassNode->InsertEndChild(characterClassText);
+
+	XMLNode *currentExpNode = doc.NewElement("CurrentExperience");
+	convert = to_string(this->currentExp);
 	c = convert.c_str();
 	XMLText *currentExpText = doc.NewText(c);
+	currentExpNode->InsertEndChild(currentExpText);
 
-	XMLNode *expAtLevelNode = doc.NewElement("Experience at Level");
+	XMLNode *expAtLevelNode = doc.NewElement("ExperienceAtLevel");
 	convert = to_string(this->expAtLevel);
 	c = convert.c_str();
 	XMLText *expAtLevelText = doc.NewText(c);
+	expAtLevelNode->InsertEndChild(expAtLevelText);
 
-	XMLNode *characterClassNode = doc.NewElement("Character Class");
-	int classification = static_cast<int>(this->classification);
-	convert = to_string(classification);
-	c = convert.c_str();
-	XMLText *characterClassText = doc.NewText(c);
+	XMLNode* strengthNode = doc.NewElement("Strength");
+	c = strength.c_str();
+	XMLText* strengthText = doc.NewText(c);
+	strengthNode->InsertEndChild(strengthText);
 
-	//beginning of shit
+	XMLNode* dexterityNode = doc.NewElement("Dexterity");
+	c = dexterity.c_str();
+	XMLText* dexterityText = doc.NewText(c);
+	dexterityNode->InsertEndChild(dexterityText);
+
+	XMLNode* charismaNode = doc.NewElement("Charisma");
+	c = charisma.c_str();
+	XMLText* charismaText = doc.NewText(c);
+	charismaNode->InsertEndChild(charismaText);
+
+	XMLNode* intelligenceNode = doc.NewElement("Intelligence");
+	c = intelligence.c_str();
+	XMLText* intelligenceText = doc.NewText(c);
+	intelligenceNode->InsertEndChild(intelligenceText);
+
+	XMLNode* constitutionNode = doc.NewElement("Constitution");
+	c = constitution.c_str();
+	XMLText* constitutionText = doc.NewText(c);
+	constitutionNode->InsertEndChild(constitutionText);
+
+	XMLNode* wisdomNode = doc.NewElement("Wisdom");
+	c = wisdom.c_str();
+	XMLText* wisdomText = doc.NewText(c);
+	wisdomNode->InsertEndChild(wisdomText);
+
+	XMLNode* armorClassNode = doc.NewElement("ArmorClass");
+	c = armorClass.c_str();
+	XMLText* armorClassText = doc.NewText(c);
+	armorClassNode->InsertEndChild(armorClassText);
+
+	XMLNode* damageBonusNode = doc.NewElement("DamageBonus");
+	c = damageBonus.c_str();
+	XMLText* damageBonusText = doc.NewText(c);
+	damageBonusNode->InsertEndChild(damageBonusText);
+
+	XMLNode* attackBonusNode = doc.NewElement("AttackBonus");
+	c = attackBonus.c_str();
+	XMLText* attackBonusText = doc.NewText(c);
+	attackBonusNode->InsertEndChild(attackBonusText);
+
+	//Will refactor this junk if I have time
 	string name;
 	string description;
 	ItemType type;
@@ -238,7 +299,6 @@ void Character::saveToFile()
 		string convert = to_string(t);
 		c = convert.c_str();
 		XMLText *typeText = doc.NewText(c);
-
 
 		XMLNode *enhancementsNode = doc.NewElement("Enhancements");
 		XMLNode *enhancementType;
@@ -581,7 +641,6 @@ void Character::saveToFile()
 		c = convert.c_str();
 		XMLText *typeText = doc.NewText(c);
 
-
 		XMLNode *enhancementsNode = doc.NewElement("Enhancements");
 		XMLNode *enhancementType;
 		XMLNode *enhancementValue;
@@ -621,14 +680,19 @@ void Character::saveToFile()
 	//helmetNode = (this->convertItemToXML(helmet,helmetNode))->ToNode();
 	//cout << helmetNode->ToElement()->Value() << endl;
 
-	nameNode->InsertEndChild(nameText);
-	currentExpNode->InsertEndChild(currentExpText);
-	expAtLevelNode->InsertEndChild(expAtLevelText);
-	characterClassNode->InsertEndChild(characterClassText);
 	characterNode->InsertEndChild(nameNode);
-	characterNode->InsertEndChild(currentExpNode);
-	characterNode->InsertEndChild(expAtLevelNode);
 	characterNode->InsertEndChild(characterClassNode);
+	characterNode->InsertEndChild(currentExpNode);
+	//characterNode->InsertEndChild(expAtLevelNode);
+	characterNode->InsertEndChild(strengthNode);
+	characterNode->InsertEndChild(dexterityNode);
+	characterNode->InsertEndChild(charismaNode);
+	characterNode->InsertEndChild(intelligenceNode);
+	characterNode->InsertEndChild(constitutionNode);
+	characterNode->InsertEndChild(wisdomNode);
+	//characterNode->InsertEndChild(armorClassNode);
+	//characterNode->InsertEndChild(damageBonusNode);
+	//characterNode->InsertEndChild(attackBonusNode);
 	characterNode->InsertEndChild(helmetNode);
 	characterNode->InsertEndChild(ring1Node);
 	characterNode->InsertEndChild(ring2Node);
@@ -654,83 +718,239 @@ void Character::saveToFile()
 	
 	doc.SaveFile(filename);
 }
-void Character::readFromFile(string filename)
+Character* Character::readFromFile(string filename)
 {
 	const char* f = filename.c_str();
 	XMLDocument doc;
 	doc.LoadFile(f);
 
-	XMLElement* nameNode = doc.FirstChildElement("Character")->FirstChildElement("Name");
-	this->setName(nameNode->ToElement()->GetText());
+	XMLElement* topChildLevel = doc.FirstChildElement("Character")->FirstChildElement("Name");
 
-}
-/*
-XMLHandle* Character::convertItemToXML(Item* item,XMLNode* itemNode)
-{
+	//Name
+	const char* characterName = topChildLevel->GetText();
+
+	//Character Class
+	topChildLevel = topChildLevel->NextSiblingElement();
+	enumUtility::characterClassifiction characterClass = static_cast<enumUtility::characterClassifiction>(stoi(topChildLevel->GetText()));
+
+	Character* character = new Character(characterName,0,characterClass);
+
+	//Current experience
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int currentExperience = stoi(topChildLevel->GetText());
+	character->gainExperiance(currentExperience);
+
+	//Strength
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int strength = stoi(topChildLevel->GetText());
+	character->setStrength(strength);
+
+	//Dexterity
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int dexterity = stoi(topChildLevel->GetText());
+	character->setDexterity(dexterity);
+
+	//Charisma
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int charisma = stoi(topChildLevel->GetText());
+	character->setCharisma(charisma);
+
+	//Intelligence
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int intelligence = stoi(topChildLevel->GetText());
+	character->setIntelligence(intelligence);
+	
+	//Constitution
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int constitution = stoi(topChildLevel->GetText());
+	character->setConstitution(constitution);
+
+	//Wisdom
+	topChildLevel = topChildLevel->NextSiblingElement();
+	int wisdom = stoi(topChildLevel->GetText());
+	character->setWisdom(wisdom);
+
 	string name;
 	string description;
-	ItemType type;
-	Enhancements enhancements;
+	int type;
+	Enhancements* enhancements;
 
-	XMLDocument doc;
-	XMLNode *nameNode = doc.NewElement("Name");
-	name = item->getName();
-	const char* c = name.c_str();
-	XMLText *nameText = doc.NewText(c);
-		
-	XMLNode *descriptionNode = doc.NewElement("Description");
-	description = item->getDescription();
-	c = description.c_str();
-	XMLText *descriptionText = doc.NewText(c);
-
-	XMLNode *typeNode = doc.NewElement("Type");
-	type = item->getType();
-	int t = static_cast<int>(type);
-	string convert = to_string(t);
-	c = convert.c_str();
-	XMLText *typeText = doc.NewText(c);
-
-	//itemNode = doc.NewElement(c);	//root type for item node THIS IS WHERE THE PROBLEM IS
-
-	XMLNode *enhancementsNode = doc.NewElement("Enhancements");
-	XMLNode *enhancementType = doc.NewElement("Type");
-	XMLNode *enhancementValue = doc.NewElement("Value");
-	enhancements = item->getEnhancements();
-	Enhancements::iterator it;
-
-	for (it = enhancements.begin(); it != enhancements.end(); it++)
+	//Helmet
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
 	{
-		int typeText = static_cast<int>(it->first);
-		int valueText = it->second;
-
-		convert = to_string(typeText);
-		c = convert.c_str();
-		XMLText *eTypeText = doc.NewText(c);
-
-		convert = to_string(valueText);
-		c = convert.c_str();
-		XMLText *eValueText = doc.NewText(c);
-
-		enhancementType->InsertEndChild(eTypeText);
-		enhancementValue->InsertEndChild(eValueText);
-		enhancementsNode->InsertEndChild(enhancementType);
-		enhancementsNode->InsertEndChild(enhancementValue);
+		HelmetItem* helmet;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //intelligence
+		int intelligence = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //wisdom
+		int wisdom = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+		helmet = new HelmetItem(name,description,intelligence,wisdom,armorClass);
+		character->setHelmet(helmet);
 	}
 
-	nameNode->InsertEndChild(nameText);
-	descriptionNode->InsertEndChild(descriptionText);
-	typeNode->InsertEndChild(typeText);
-	itemNode->InsertEndChild(nameNode);
-	itemNode->InsertEndChild(descriptionNode);
-	itemNode->InsertEndChild(typeNode);
-	itemNode->InsertEndChild(enhancementsNode);
-	//if (itemNode->FirstChildElement() != NULL)
-	//cout << itemNode->FirstChildElement()->GetText() << endl;
-	//cout << itemNode->FirstChildElement()->NextSiblingElement()->GetText() << endl;
-	//cout << itemNode->FirstChildElement()->NextSiblingElement()->NextSiblingElement()->GetText() << endl;
-	//cout << itemNode->ToElement()->Value() << endl;
+	//Ring 1
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		RingItem* ring1;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //strength
+		int strength = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //constitution
+		int constitution = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //wisdom
+		int wisdom = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //charisma
+		int charisma = stoi(itemAttribute->GetText());
 
-		XMLHandle* returnNode = new XMLHandle(itemNode);
+		ring1 = new RingItem(name,description,armorClass,strength,constitution,wisdom,charisma);
+		character->setRing1(ring1);
+	}
 
-	return returnNode;
-}*/
+	//Ring 2
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		RingItem* ring2;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //strength
+		int strength = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //constitution
+		int constitution = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //wisdom
+		int wisdom = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //charisma
+		int charisma = stoi(itemAttribute->GetText());
+
+		ring2 = new RingItem(name,description,armorClass,strength,constitution,wisdom,charisma);
+		character->setRing2(ring2);
+	}
+
+	//Weapon
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		WeaponItem* weapon;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //attack bonus
+		int attackBonus = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //damage bonus
+		int damageBonus = stoi(itemAttribute->GetText());
+
+		weapon = new WeaponItem(name,description,attackBonus,damageBonus);
+		character->setWeapon(weapon);
+	}
+
+	//Shield
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		ShieldItem* shield;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+
+		shield = new ShieldItem(name,description,armorClass);
+		character->setShield(shield);
+	}
+
+	//Armour
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		ArmourItem* armour;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+
+		armour = new ArmourItem(name,description,armorClass);
+		character->setArmor(armour);
+	}
+
+	//Belt
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		BeltItem* belt;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //constitution
+		int constitution = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //strength
+		int strength = stoi(itemAttribute->GetText());
+
+		belt = new BeltItem(name,description,constitution,strength);
+		character->setBelt(belt);
+	}
+
+	//Boots
+	topChildLevel = topChildLevel->NextSiblingElement();
+	if (!topChildLevel->NoChildren())
+	{
+		BootsItem* boots;
+		XMLElement* itemAttribute = topChildLevel->FirstChildElement("Name");
+		name = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //description
+		description = itemAttribute->GetText();
+		itemAttribute = itemAttribute->NextSiblingElement(); //type
+		type = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement(); //enhancements
+		itemAttribute = itemAttribute->FirstChildElement()->NextSiblingElement(); //armor class
+		int armorClass = stoi(itemAttribute->GetText());
+		itemAttribute = itemAttribute->NextSiblingElement()->NextSiblingElement(); //dexterity
+		int dexterity = stoi(itemAttribute->GetText());
+
+		boots = new BootsItem(name,description,armorClass,dexterity);
+		character->setBoots(boots);
+	}
+
+	return character;
+}
