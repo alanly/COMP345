@@ -27,6 +27,7 @@ void GameEngine::drawMainView()
 {
 	gameUI->draw();
 	mapView->draw();
+	sideBar->draw();
 }
 
 void GameEngine::handleMainEvents()

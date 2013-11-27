@@ -80,7 +80,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameEngineCharacterItems.cpp" />
+    <ClCompile Include="GameEngineCharacterStats.cpp" />
     <ClCompile Include="GameEngineMap.cpp" />
+    <ClCompile Include="GameEngineSideBar.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HelmetItem.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -115,7 +118,10 @@
     <ClInclude Include="Enum_Utility.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameEngineCharacterItems.h" />
+    <ClInclude Include="GameEngineCharacterStats.h" />
     <ClInclude Include="GameEngineMap.h" />
+    <ClInclude Include="GameEngineSideBar.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HelmetItem.h" />
     <ClInclude Include="InputHandler.h" />

@@ -4,6 +4,7 @@
 #include "GameEngineMap.h"
 #include "Character.h"
 #include "Map.h"
+#include "GameEngineSideBar.h"
 
 class GameEngine : public GameObject
 {
@@ -20,7 +21,7 @@ private:
 
 	Map* map;
 	GameEngineMap* mapView;
-
+	GameEngineSideBar* sideBar;
 	GameEngineView currentView;
 
 public:
