@@ -2,6 +2,10 @@
 #include "GameObject.h"
 #include "Character.h"
 #include "InputHandler.h"
+#include "Director.h"
+#include "BullyCharacterBuilder.h"
+#include "TankCharacterBuilder.h" 
+#include "NimbleCharacterBuilder.h"
 
 class CharacterEditor : public GameObject
 {
@@ -38,6 +42,11 @@ private:
 	GameObject* rollButton;
 
 	GameObject* Char_Portrait;
+
+	Director* d;
+	TankCharacterBuilder* tank;
+	NimbleCharacterBuilder* nimble;
+	BullyCharacterBuilder* bully;
 
 	GameObject* playerNameInput;
 	bool gotIt;

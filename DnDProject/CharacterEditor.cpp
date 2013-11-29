@@ -10,7 +10,11 @@
 CharacterEditor::CharacterEditor(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gotIt = false;
-	
+	d = new Director();
+	tank = new TankCharacterBuilder();
+	bully = new BullyCharacterBuilder();
+	nimble = new NimbleCharacterBuilder();
+
 	Button_Char_New = new GameObject(new LoaderParameters(80, 200, 204, 32, 0, 0, "Button_Char_New"));
 	Button_Char_Load = new GameObject(new LoaderParameters(100, 250, 212, 32, 0, 0, "Button_Char_Load"));
 	
@@ -173,9 +177,12 @@ void CharacterEditor::handleEntryViewEvents()
 
 	if (Button_Char_New->isClicked())
 	{
-		c = new Character("",1,enumUtility::Fighter);
+		d->setCharacterBuilder(tank);
+		d->constructCharacter("",1);
+		c = d->getCharacter();
 		currentView = CharacterEditorView::EDITOR;
 		Button_Char_New->resetClicked();
+
 		loadCharacterTextures();
 	}
 	if (Button_Char_Load->isClicked())
@@ -199,7 +206,29 @@ void CharacterEditor::handleEditorViewEvents()
 		enumUtility::characterClassifiction charClass = c->getClassification();
 		c->~Character();
 		// maybe change this to just change values and not create a new object each time?
-		c = new Character(name,1,charClass);
+		//c = new Character(name,1,charClass);
+		switch(charClass){
+			case enumUtility::Fighter:
+				d->setCharacterBuilder(tank);
+				d->constructCharacter(name, 1);
+				c = d->getCharacter();
+			break;
+			case enumUtility::Cleric:
+				d->setCharacterBuilder(nimble);
+				d->constructCharacter(name,1);
+				c = d->getCharacter();
+			break;
+			case enumUtility::Thief:
+				d->setCharacterBuilder(bully);
+				d->constructCharacter(name, 1);
+				c = d->getCharacter();
+			break;
+			case enumUtility::Wizard:
+				d->setCharacterBuilder(nimble);
+				d->constructCharacter(name, 1);
+				c = d->getCharacter();
+			break;
+		}
 	}
 	if(changeClassificationButton->isClicked())
 	{
@@ -367,7 +396,7 @@ void CharacterEditor::loadCharacterTextures()
 	TextureManager::getInstance()->loadFont(wisdomValue->getParameters()->getId(),Game::getInstance()->getRenderer(), to_string(c->getWisdom()));
 	TextureManager::getInstance()->loadFont(constitutionValue->getParameters()->getId(),Game::getInstance()->getRenderer(), to_string(c->getConstitution()));
 	TextureManager::getInstance()->loadFont(charismaValue->getParameters()->getId(),Game::getInstance()->getRenderer(), to_string(c->getCharisma()));
-
+		
 	TextureManager::getInstance()->loadFont(playerNameInput->getParameters()->getId(),Game::getInstance()->getRenderer(), "Name: " + c->getName(), 30);
 
 	string classification;

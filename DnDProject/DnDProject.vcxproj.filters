@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Controllers">
       <UniqueIdentifier>{a4e57c8f-ca60-4539-a3ad-ef20dd37f9f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Builders">
+      <UniqueIdentifier>{4c905820-b5d2-4043-9777-128639c79957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Builders">
+      <UniqueIdentifier>{9731ff84-be01-4115-a32d-bb429ffebe84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -131,6 +137,21 @@
     </ClCompile>
     <ClCompile Include="GameEngineCharacterStats.cpp">
       <Filter>Source Files\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="BullyCharacterBuilder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterBuilder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="NimbleCharacterBuilder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="TankCharacterBuilder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>Source Files\Builders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +271,21 @@
     </ClInclude>
     <ClInclude Include="GameEngineCharacterStats.h">
       <Filter>Header Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="BullyCharacterBuilder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterBuilder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="NimbleCharacterBuilder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="TankCharacterBuilder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Header Files\Builders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,9 @@ bool Entity::takeDamage(int dmg)
 	}
 	return false;
 }
+void Entity::setLevel(int level){
+	this->level = level;
+}
 void Entity::addItemToInventory(Item* item)
 {
 	inventory.push_back(item);
@@ -115,4 +118,13 @@ void Entity::setName(string name)
 }
 vector<Item*> Entity::getItems(){
 	return this->inventory;
+}
+void Entity::setStatistics(map<enumUtility::abilityModifer,int> stats)
+{
+	this->stats[enumUtility::Strength] = stats[enumUtility::Strength];
+	this->stats[enumUtility::Dexterity] = stats[enumUtility::Dexterity];
+	this->stats[enumUtility::Charisma] = stats[enumUtility::Charisma];
+	this->stats[enumUtility::Constitution] = stats[enumUtility::Constitution];
+	this->stats[enumUtility::Wisdom] = stats[enumUtility::Wisdom];
+	this->stats[enumUtility::Inteligence] = stats[enumUtility::Inteligence];
 }

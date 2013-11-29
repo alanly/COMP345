@@ -23,7 +23,7 @@ void GameEngineCharacterItems::draw()
 		if(*iter != 0)
         {
 			GameObject* gameObj = new GameObject(new LoaderParameters(x, y, 300, 25, 0, 0, (*iter)->getName()));
-			SDL_Color  color = {255,0,0};
+			SDL_Color  color = {255,255,0};
 			TextureManager::getInstance()->loadFont(gameObj->getParameters()->getId(),Game::getInstance()->getRenderer(), gameObj->getParameters()->getId(), color);
 			gameObj->draw();
 			items.push_back(gameObj);

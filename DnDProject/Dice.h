@@ -5,4 +5,5 @@
 namespace Dice{
 	int roleTenSideDice();
 	int roleTwentySideDice();
+	int roleSixSideDice();
 }

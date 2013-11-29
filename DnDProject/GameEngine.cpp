@@ -1,20 +1,24 @@
 #pragma once
-
 #include "GameEngine.h"
 #include "TextureManager.h"
 #include <iostream>
 #include "Game.h"
 #include "InputHandler.h"
-
+#include "Director.h"
+#include "TankCharacterBuilder.h"
 #include "AStar.h"
 
 GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gameUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameUI"));
-	c = new Character("Player", 1);
-	ArmourItem* item = new ArmourItem("Test","Desc");
+	Director* d = new Director();
+	TankCharacterBuilder* tank = new TankCharacterBuilder();
+	d->setCharacterBuilder(tank);
+	d->constructCharacter("RMT",1);
+	c = d->getCharacter();
+	ArmourItem* item = new ArmourItem("Armor","Desc");
 	c->addItemToInventory(item);
-	HelmetItem* hel = new HelmetItem("Test","Desc");
+	HelmetItem* hel = new HelmetItem("Helmet1","Desc");
 	c->addItemToInventory(hel);
 	map = new Map(20, 20, Position(1, 1), Position(5, 1));
 	mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "gameEngineMap"), map, c, 1);

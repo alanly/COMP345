@@ -29,7 +29,9 @@ class Entity
 		int getLevel();
 		void addItemToInventory(Item* item);
 		void removeItemFromInventory(Item* item);
+		void setLevel(int level);
 		vector<Item*> getItems();
+		void setStatistics(map<enumUtility::abilityModifer,int> stats);
 		//getters
 		int getStrength();
 		int getDexterity();
