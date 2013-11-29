@@ -17,7 +17,7 @@ class GameEngineCharacterItems  : public GameObject
 		void draw();
 		void loadTextures();
 
-
+		void setCharacter(Character* character);
 		void handleMainEvents();
 };
 

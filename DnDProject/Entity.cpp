@@ -131,3 +131,32 @@ void Entity::setStatistics(map<enumUtility::abilityModifer,int> stats)
 	this->stats[enumUtility::Wisdom] = stats[enumUtility::Wisdom];
 	this->stats[enumUtility::Inteligence] = stats[enumUtility::Inteligence];
 }
+void Entity::setStrength(int strength)
+{
+        this->stats[enumUtility::Strength] = strength;
+}
+
+void Entity::setDexterity(int dexterity)
+{
+        this->stats[enumUtility::Dexterity] = dexterity;
+}
+
+void Entity::setCharisma(int charisma)
+{
+        this->stats[enumUtility::Charisma] = charisma;
+}
+
+void Entity::setIntelligence(int intelligence)
+{
+        this->stats[enumUtility::Inteligence] = intelligence;
+}
+
+void Entity::setConstitution(int constitution)
+{
+        this->stats[enumUtility::Constitution] = constitution;
+}
+
+void Entity::setWisdom(int wisdom)
+{
+        this->stats[enumUtility::Wisdom] = wisdom;
+}

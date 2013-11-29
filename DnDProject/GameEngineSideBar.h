@@ -25,6 +25,6 @@ public:
 
 
 	void handleMainEvents();
-
+	void setCharacter(Character* character);
 };
 

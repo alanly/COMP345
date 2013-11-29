@@ -28,3 +28,9 @@ void GameEngineSideBar::loadTextures()
 {
 	
 }
+void GameEngineSideBar::setCharacter(Character* character)
+{
+	this->character = character;
+	charItemView->setCharacter(character);
+	charStatsView->setCharacter(character);
+}

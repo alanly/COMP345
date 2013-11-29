@@ -157,5 +157,8 @@ Game* Game::getInstance()
 }
 void Game::setCurrentView(enumUtility::gameView currentView)
 {
+	if(currentView == enumUtility::Game_Main){
+		((GameEngine*)gameObjects[enumUtility::Game_Main])->setCharacter(((CharacterEditor*)gameObjects[enumUtility::Character_Editor])->getCharacter());
+	}
 	this->currentView = currentView;
 }

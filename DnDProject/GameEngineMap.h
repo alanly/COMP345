@@ -32,7 +32,7 @@ public:
 	void loadTextures();
 
 	int getMode();
-
+	void setCharacter(Character*);
 	void handleMainEvents();
 
 };

@@ -36,3 +36,7 @@ void GameEngineCharacterItems::loadTextures()
 {
 	
 }
+void GameEngineCharacterItems::setCharacter(Character* character)
+{
+	this->character = character;
+}

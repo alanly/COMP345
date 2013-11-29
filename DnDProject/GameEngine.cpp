@@ -20,6 +20,7 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 	c->addItemToInventory(item);
 	HelmetItem* hel = new HelmetItem("Helmet1","Desc");
 	c->addItemToInventory(hel);
+
 	map = new Map(20, 20, Position(1, 1), Position(5, 1));
 	mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "gameEngineMap"), map, c, 1);
 	sideBar = new GameEngineSideBar(new LoaderParameters(720, 336, 0, 0, 0, 0, "gameEngineMap"),c);
@@ -106,4 +107,11 @@ void GameEngine::draw() {
 
 void GameEngine::loadTextures() {
 	TextureManager::getInstance()->load("img/game/ui/game_ui.png", gameUI->getParameters()->getId(), Game::getInstance()->getRenderer());
+}
+
+void GameEngine::setCharacter(Character* character)
+{
+	sideBar->setCharacter(character);
+	mapView->setCharacter(character);
+	this->c = character;
 }

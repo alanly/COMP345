@@ -54,6 +54,6 @@ class Character : public Entity
 		void setBelt(BeltItem* belt);
 		void setClassification(enumUtility::characterClassifiction);
 		void saveToFile();
-		void readFromFile(string filename);
+		Character* readFromFile(string filename);
 };
 

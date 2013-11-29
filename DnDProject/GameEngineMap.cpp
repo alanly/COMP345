@@ -132,3 +132,8 @@ void GameEngineMap::loadTextures()
 int GameEngineMap::getMode() {
 	return this->mode;
 }
+
+void GameEngineMap::setCharacter(Character* character)
+{
+	this->character = character;
+}

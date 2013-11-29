@@ -15,5 +15,6 @@ class GameEngineCharacterStats : public GameObject
 		void draw();
 		void loadTextures();
 		void handleMainEvents();
+		void setCharacter(Character* character);
 };
 

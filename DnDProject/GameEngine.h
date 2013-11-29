@@ -32,7 +32,7 @@ public:
 
 	void handleMainEvents();
 	void handleEvents();
-
+	void setCharacter(Character*);
 	void draw();
 	//void handleEvents();
 	void loadTextures();

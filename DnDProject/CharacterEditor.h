@@ -71,7 +71,7 @@ public:
 	void handleEditorViewEvents();
 	void handleSaveViewEvents();
 	void handleLoadViewEvents();
-
+	Character* getCharacter();
 	void draw();
 	void handleEvents();
 	void loadTextures();

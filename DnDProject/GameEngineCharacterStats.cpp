@@ -21,3 +21,7 @@ void GameEngineCharacterStats::loadTextures()
 {
 	
 }
+void GameEngineCharacterStats::setCharacter(Character* character)
+{
+	this->character = character;
+}

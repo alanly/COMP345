@@ -205,8 +205,6 @@ void CharacterEditor::handleEditorViewEvents()
 		string name = c->getName();
 		enumUtility::characterClassifiction charClass = c->getClassification();
 		c->~Character();
-		// maybe change this to just change values and not create a new object each time?
-		//c = new Character(name,1,charClass);
 		switch(charClass){
 			case enumUtility::Tank:
 				d->setCharacterBuilder(tank);
@@ -303,7 +301,17 @@ void CharacterEditor::handleLoadViewEvents()
 			{
 				(*iter)->resetClicked();
 				//cout << (*iter)->getParameters()->getId() << " will be loaded change view to game view with new character" << endl;
-				currentView = CharacterEditorView::MAP;
+				string filename = (*iter)->getParameters()->getId() + ".xml";
+				c = c->readFromFile(filename);
+				if(c != nullptr)
+				{	
+
+					Game::getInstance()->setCurrentView(enumUtility::Game_Main);
+				}else{
+					cout << "character is null " << endl;
+				}
+				
+				//currentView = CharacterEditorView::MAP;
 			}
         }
     }
@@ -413,4 +421,8 @@ void CharacterEditor::loadCharacterTextures()
 			break;
 	}
 	TextureManager::getInstance()->loadFont(characterClassification->getParameters()->getId(),Game::getInstance()->getRenderer(), classification, 34);
+}
+
+Character* CharacterEditor::getCharacter(){
+	return this->c;
 }

@@ -42,5 +42,13 @@ class Entity
 		int getArmorClass();
 		int getDamageBonus();
 		int getAttackBonus();
+
+		 //setters
+        void setStrength(int strength);
+        void setDexterity(int dexterity);
+        void setCharisma(int charisma);
+        void setIntelligence(int intelligence);
+        void setConstitution(int constitution);
+        void setWisdom(int wisdom);
 };
 
