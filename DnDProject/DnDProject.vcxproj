@@ -111,6 +111,7 @@
     <ClInclude Include="..\tinyxml\tinyxml2.h" />
     <ClInclude Include="ArmourItem.h" />
     <ClInclude Include="AStar.h" />
+    <ClInclude Include="BackpackContainerBuilder.h" />
     <ClInclude Include="BeltItem.h" />
     <ClInclude Include="BootsItem.h" />
     <ClInclude Include="BullyCharacterBuilder.h" />
@@ -119,12 +120,15 @@
     <ClInclude Include="CharacterBuilder.h" />
     <ClInclude Include="CharacterEditor.h" />
     <ClInclude Include="Container.h" />
+    <ClInclude Include="ContainerBuildDirector.h" />
+    <ClInclude Include="ContainerBuilder.h" />
     <ClInclude Include="ContainerType.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Enum_Utility.h" />
+    <ClInclude Include="EquippedContainerBuilder.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameEngineCharacterItems.h" />
@@ -143,6 +147,7 @@
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="MapList.h" />
     <ClInclude Include="MapView.h" />
+    <ClInclude Include="MerchantContainerBuilder.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="NimbleCharacterBuilder.h" />
     <ClInclude Include="Position.h" />
@@ -152,6 +157,7 @@
     <ClInclude Include="TankCharacterBuilder.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TreasureChestContainerBuilder.h" />
     <ClInclude Include="WeaponItem.h" />
   </ItemGroup>
   <ItemGroup>
