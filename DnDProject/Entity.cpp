@@ -13,6 +13,10 @@ Entity::Entity(string name, int level)
 	this->name = name;
 	this->level = level;
 	initializeStats();
+	this->attackBonus = Dice::roleTenSideDice() + stats[enumUtility::Strength] + stats[enumUtility::Dexterity];
+	this->damageBonus =  Dice::roleTenSideDice() + stats[enumUtility::Strength];
+	this->armorClass =  Dice::roleTenSideDice() + stats[enumUtility::Dexterity];
+	this->numberOfAttacks = (this->level / 5) + 1;
 }
 void Entity::initializeStats()
 {
@@ -40,6 +44,7 @@ bool Entity::takeDamage(int dmg)
 }
 void Entity::setLevel(int level){
 	this->level = level;
+	this->numberOfAttacks = (this->level / 5) + 1;
 }
 void Entity::addItemToInventory(Item* item)
 {
@@ -52,16 +57,16 @@ void Entity::removeItemFromInventory(Item* item)
 
 int Entity::getArmorClass()
 {
-	return  Dice::roleTenSideDice() + stats[enumUtility::Dexterity];	
+	return  this->armorClass;
 }
 
 int Entity::getDamageBonus()
 {
-	return  Dice::roleTenSideDice() + stats[enumUtility::Strength];
+	return this->damageBonus
 }
 int Entity::getAttackBonus()
 {
-	return Dice::roleTenSideDice() + stats[enumUtility::Strength] + stats[enumUtility::Dexterity];
+	return this->attackBonus;
 }
 
 /*
@@ -159,4 +164,7 @@ void Entity::setConstitution(int constitution)
 void Entity::setWisdom(int wisdom)
 {
         this->stats[enumUtility::Wisdom] = wisdom;
+}
+int Entity::getNumberOfAttacks(){
+	return this->numberOfAttacks;
 }

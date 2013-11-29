@@ -251,7 +251,7 @@ void CharacterEditor::handleEditorViewEvents()
 		if (c->getName() != "")
 		{
 			c->saveToFile();
-			Game::getInstance()->setCurrentView(enumUtility::Game_Main);
+			Game::getInstance()->setCurrentView(enumUtility::Map_Chooser);
 		}
 	}
 
