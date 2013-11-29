@@ -137,3 +137,7 @@ void GameEngineMap::setCharacter(Character* character)
 {
 	this->character = character;
 }
+void GameEngineMap::setMap(Map* map)
+{
+	this->map = map;
+}

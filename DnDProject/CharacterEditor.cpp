@@ -306,7 +306,7 @@ void CharacterEditor::handleLoadViewEvents()
 				if(c != nullptr)
 				{	
 
-					Game::getInstance()->setCurrentView(enumUtility::Game_Main);
+					Game::getInstance()->setCurrentView(enumUtility::Map_Chooser);
 				}else{
 					cout << "character is null " << endl;
 				}

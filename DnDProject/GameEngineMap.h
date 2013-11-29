@@ -34,6 +34,6 @@ public:
 	int getMode();
 	void setCharacter(Character*);
 	void handleMainEvents();
-
+	void setMap(Map* map);
 };
 

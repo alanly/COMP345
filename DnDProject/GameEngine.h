@@ -36,5 +36,6 @@ public:
 	void draw();
 	//void handleEvents();
 	void loadTextures();
+	void setMap(Map* map);
 };
 

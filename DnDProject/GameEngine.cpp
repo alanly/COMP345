@@ -102,7 +102,6 @@ void GameEngine::draw() {
 		drawMainView();
 		break;
 	}
-	
 }
 
 void GameEngine::loadTextures() {
@@ -114,4 +113,8 @@ void GameEngine::setCharacter(Character* character)
 	sideBar->setCharacter(character);
 	mapView->setCharacter(character);
 	this->c = character;
+}
+void GameEngine::setMap(Map* map){
+	this->mapView->setMap(map);
+	this->map = map;
 }

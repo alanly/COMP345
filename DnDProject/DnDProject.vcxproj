@@ -95,6 +95,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="MapList.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="NimbleCharacterBuilder.cpp" />
     <ClCompile Include="RingItem.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="MapList.h" />
     <ClInclude Include="MapView.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="NimbleCharacterBuilder.h" />

@@ -8,5 +8,5 @@ namespace enumUtility
 	enum equipmentType { Helmet, Armor, Boots, Belt, Weapon, Shield, Ring1, Ring2, Empty };
 	enum characterClassifiction { Nimble, Tank, Bully, Monster };
 	enum abilityModifer { Strength, Dexterity, Inteligence, Charisma, Constitution,Wisdom };
-	enum gameView{ Main_Menu, Character_Editor, Map_Editor, Game_Main};
+	enum gameView{ Main_Menu, Character_Editor, Map_Editor, Game_Main, Map_Chooser};
 }

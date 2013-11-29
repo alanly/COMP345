@@ -153,6 +153,9 @@
     <ClCompile Include="Director.cpp">
       <Filter>Source Files\Builders</Filter>
     </ClCompile>
+    <ClCompile Include="MapList.cpp">
+      <Filter>Source Files\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="Director.h">
       <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="MapList.h">
+      <Filter>Header Files\Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

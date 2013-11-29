@@ -8,7 +8,7 @@
 #include "CharacterEditor.h"
 #include "MapEditor.h"
 #include "GameEngine.h"
-
+#include "MapList.h"
 using namespace std;
 
 Game* Game::instance = 0;
@@ -71,6 +71,7 @@ void Game::initGameObjects()
 	gameObjects[enumUtility::Character_Editor] = new CharacterEditor(new LoaderParameters(0, 0, 600, 600, 0, 0, "characterEditor"));
 	gameObjects[enumUtility::Map_Editor] = new MapEditor(new LoaderParameters(0, 0, 600, 600, 0, 0, "mapEditor"));
 	gameObjects[enumUtility::Game_Main] = new GameEngine(new LoaderParameters(0, 0, 600, 600, 0, 0, "gameEngine"));
+	gameObjects[enumUtility::Map_Chooser] = new MapList(new LoaderParameters(0, 0, 600, 600, 0, 0, "mapChooser"));
 }
 
 void Game::render()
@@ -92,6 +93,10 @@ void Game::render()
 		case enumUtility::Game_Main:
 			// If the current view is the map editor, then we display it.
 			((GameEngine*)gameObjects[enumUtility::Game_Main])->draw();
+			break;
+		case enumUtility::Map_Chooser:
+			// If the current view is the map editor, then we display it.
+			((MapList*)gameObjects[enumUtility::Map_Chooser])->draw();
 			break;
 	}
 	SDL_RenderPresent(renderer);
@@ -117,6 +122,10 @@ void Game::handleEvents()
 		case enumUtility::Game_Main:
 			// If the current view is the map editor, then we display it.
 			((GameEngine*)gameObjects[enumUtility::Game_Main])->handleEvents();
+			break;
+		case enumUtility::Map_Chooser:
+			// If the current view is the map editor, then we display it.
+			((MapList*)gameObjects[enumUtility::Map_Chooser])->handleEvents();
 			break;
 	}
 
@@ -157,8 +166,11 @@ Game* Game::getInstance()
 }
 void Game::setCurrentView(enumUtility::gameView currentView)
 {
-	if(currentView == enumUtility::Game_Main){
+	if(currentView == enumUtility::Map_Chooser){
 		((GameEngine*)gameObjects[enumUtility::Game_Main])->setCharacter(((CharacterEditor*)gameObjects[enumUtility::Character_Editor])->getCharacter());
+	}
+	if(currentView == enumUtility::Game_Main){
+		((GameEngine*)gameObjects[enumUtility::Game_Main])->setMap(((MapList*)gameObjects[enumUtility::Map_Chooser])->getMap());
 	}
 	this->currentView = currentView;
 }
