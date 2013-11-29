@@ -28,6 +28,7 @@ public:
 	// Loads a resource (image) to be used a sprite or spritesheet later.
 	bool load(const string &fileName, string id, SDL_Renderer* renderer);
 	bool loadFont(string id, SDL_Renderer* renderer,string message);
+	bool loadFont(string id, SDL_Renderer* renderer,string message, SDL_Color color);
 	bool loadFont(string id, SDL_Renderer* renderer,string message, int size);
 	// Singleton function.
 	static TextureManager* getInstance();

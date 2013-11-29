@@ -42,11 +42,15 @@ bool TextureManager::load(const string &fileName, string id, SDL_Renderer* rende
 
 bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message) 
 {
+	SDL_Color color = {0, 0, 0};		
+	return loadFont(id, renderer, message, color); 
+}
+bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message, SDL_Color color) 
+{
 	if (message == "") message = " ";
 
 	TTF_Init();
-	TTF_Font *font = TTF_OpenFont("res/english_111_adagio_bt.ttf", 24);
-	SDL_Color color = {0, 0, 0};		
+	TTF_Font *font = TTF_OpenFont("res/english_111_adagio_bt.ttf", 24);	
 	SDL_Surface *surface = TTF_RenderText_Blended(font, message.c_str(), color);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
@@ -60,7 +64,6 @@ bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message)
 	}
 	return false;
 }
-
 bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message, int size) 
 {
 	if (message == "") message = " ";

@@ -5,6 +5,8 @@ GameEngineSideBar::GameEngineSideBar(LoaderParameters* parameters, Character* ch
 {
 	this->character = character;
 	loadTextures();
+	this->charItemView = new GameEngineCharacterItems(parameters, character);
+	this->charStatsView = new GameEngineCharacterStats(parameters, character);
 }
 
 

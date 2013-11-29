@@ -29,6 +29,7 @@ class Entity
 		int getLevel();
 		void addItemToInventory(Item* item);
 		void removeItemFromInventory(Item* item);
+		vector<Item*> getItems();
 		//getters
 		int getStrength();
 		int getDexterity();

@@ -113,3 +113,6 @@ void Entity::setName(string name)
 {
 	this->name = name;
 }
+vector<Item*> Entity::getItems(){
+	return this->inventory;
+}

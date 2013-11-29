@@ -12,8 +12,13 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gameUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameUI"));
 	c = new Character("Player", 1);
+	ArmourItem* item = new ArmourItem("Test","Desc");
+	c->addItemToInventory(item);
+	HelmetItem* hel = new HelmetItem("Test","Desc");
+	c->addItemToInventory(hel);
 	map = new Map(20, 20, Position(1, 1), Position(5, 1));
 	mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "gameEngineMap"), map, c, 1);
+	sideBar = new GameEngineSideBar(new LoaderParameters(720, 336, 0, 0, 0, 0, "gameEngineMap"),c);
 	currentView = GameEngineView::MAIN;
 
 	loadTextures();
@@ -25,9 +30,10 @@ GameEngine::~GameEngine()
 
 void GameEngine::drawMainView()
 {
+
 	gameUI->draw();
-	mapView->draw();
 	sideBar->draw();
+	mapView->draw();
 }
 
 void GameEngine::handleMainEvents()
