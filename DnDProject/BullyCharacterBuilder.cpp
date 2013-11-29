@@ -17,6 +17,7 @@ void BullyCharacterBuilder::buildDefaultCharacteristics(string name, int level)
 {
 	this->c->setName(name);
 	this->c->setLevel(level);
+	this->c->setClassification(enumUtility::Bully);
 }
 void BullyCharacterBuilder::buildStats(void)
 {

@@ -16,6 +16,7 @@ void TankCharacterBuilder::buildDefaultCharacteristics(string name, int level)
 {
 	this->c->setName(name);
 	this->c->setLevel(level);
+	this->c->setClassification(enumUtility::Tank);
 }
 void TankCharacterBuilder::buildStats(void)
 {

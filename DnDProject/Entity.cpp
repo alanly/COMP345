@@ -119,6 +119,9 @@ void Entity::setName(string name)
 vector<Item*> Entity::getItems(){
 	return this->inventory;
 }
+int Entity::getLevel(){
+	return this->level;
+}
 void Entity::setStatistics(map<enumUtility::abilityModifer,int> stats)
 {
 	this->stats[enumUtility::Strength] = stats[enumUtility::Strength];

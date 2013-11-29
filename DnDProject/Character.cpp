@@ -9,7 +9,7 @@ using namespace std;
 
 Character::Character(string name, int level) : Entity(name,level)
 {
-	this->classification = enumUtility::Fighter;
+	this->classification = enumUtility::Tank;
 }
 Character::Character(string name, int level, enumUtility::characterClassifiction classification) : Entity(name,level)
 {

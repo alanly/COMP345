@@ -18,6 +18,7 @@ void NimbleCharacterBuilder::buildDefaultCharacteristics(string name, int level)
 {
 	this->c->setName(name);
 	this->c->setLevel(level);
+	this->c->setClassification(enumUtility::Nimble);
 }
 void NimbleCharacterBuilder::buildStats(void)
 {

@@ -208,23 +208,18 @@ void CharacterEditor::handleEditorViewEvents()
 		// maybe change this to just change values and not create a new object each time?
 		//c = new Character(name,1,charClass);
 		switch(charClass){
-			case enumUtility::Fighter:
+			case enumUtility::Tank:
 				d->setCharacterBuilder(tank);
 				d->constructCharacter(name, 1);
 				c = d->getCharacter();
 			break;
-			case enumUtility::Cleric:
+			case enumUtility::Nimble:
 				d->setCharacterBuilder(nimble);
 				d->constructCharacter(name,1);
 				c = d->getCharacter();
 			break;
-			case enumUtility::Thief:
+			case enumUtility::Bully:
 				d->setCharacterBuilder(bully);
-				d->constructCharacter(name, 1);
-				c = d->getCharacter();
-			break;
-			case enumUtility::Wizard:
-				d->setCharacterBuilder(nimble);
 				d->constructCharacter(name, 1);
 				c = d->getCharacter();
 			break;
@@ -233,21 +228,23 @@ void CharacterEditor::handleEditorViewEvents()
 	if(changeClassificationButton->isClicked())
 	{
 		changeClassificationButton->resetClicked();
-		if(c->getClassification() == enumUtility::Cleric)
+		if(c->getClassification() == enumUtility::Nimble)
 		{
-			c->setClassification(enumUtility::Fighter);
+			d->setCharacterBuilder(tank);
+			d->constructCharacter(c->getName(), c->getLevel());
+			c = d->getCharacter();
 		}
-		else if(c->getClassification() == enumUtility::Fighter)
+		else if(c->getClassification() == enumUtility::Tank)
 		{
-			c->setClassification(enumUtility::Thief);
+			d->setCharacterBuilder(bully);
+			d->constructCharacter(c->getName(), c->getLevel());
+			c = d->getCharacter();
 		}
-		else if(c->getClassification() == enumUtility::Thief)
+		else if(c->getClassification() == enumUtility::Bully)
 		{
-			c->setClassification(enumUtility::Wizard);
-		}
-		else if(c->getClassification() == enumUtility::Wizard)
-		{
-			c->setClassification(enumUtility::Cleric);
+			d->setCharacterBuilder(nimble);
+			d->constructCharacter(c->getName(), c->getLevel());
+			c = d->getCharacter();
 		}
 	}
 	if(Button_Char_Play->isClicked())
@@ -402,21 +399,17 @@ void CharacterEditor::loadCharacterTextures()
 	string classification;
 	switch(c->getClassification())
 	{
-		case enumUtility::Cleric:
-			classification = "Cleric";
+		case enumUtility::Nimble:
+			classification = "Nimble";
 			TextureManager::getInstance()->load("img/game/portrait/portrait_cleric.png", Char_Portrait->getParameters()->getId(), Game::getInstance()->getRenderer());
 			break;
-		case enumUtility::Fighter:
-			classification = "Fighter";
+		case enumUtility::Tank:
+			classification = "Tank";
 			TextureManager::getInstance()->load("img/game/portrait/portrait_fighter.png", Char_Portrait->getParameters()->getId(), Game::getInstance()->getRenderer());
 			break;
-		case enumUtility::Thief:
-			classification = "Thief";
+		case enumUtility::Bully:
+			classification = "Bully";
 			TextureManager::getInstance()->load("img/game/portrait/portrait_thief.png", Char_Portrait->getParameters()->getId(), Game::getInstance()->getRenderer());
-			break;
-		case enumUtility::Wizard:
-			classification = "Wizard";
-			TextureManager::getInstance()->load("img/game/portrait/portrait_wizard.png", Char_Portrait->getParameters()->getId(), Game::getInstance()->getRenderer());
 			break;
 	}
 	TextureManager::getInstance()->loadFont(characterClassification->getParameters()->getId(),Game::getInstance()->getRenderer(), classification, 34);
