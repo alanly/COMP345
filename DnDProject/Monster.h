@@ -18,5 +18,6 @@ class Monster : public Entity
 		// should move this to entity probably
 		void setPosition(Position);
 		Position getPosition();
+		int getArmorClass();
 };
 

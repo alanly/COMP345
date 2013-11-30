@@ -31,7 +31,7 @@ class Character : public Entity
 		Character(string, int, enumUtility::characterClassifiction);
 		~Character(void);
 		void gainExperiance(int exp);
-		
+		int getArmorClass();
 		//getters
 		enumUtility::characterClassifiction getClassification();
 		HelmetItem* getHelmet();

@@ -43,7 +43,7 @@ class Entity
 		int getInteligence();
 		int getConstitution();
 		int getWisdom();
-		int getArmorClass();
+		int getArmorClass() = 0;
 		int getDamageBonus();
 		int getAttackBonus();
 

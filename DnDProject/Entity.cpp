@@ -55,11 +55,6 @@ void Entity::removeItemFromInventory(Item* item)
 	inventory.erase(std::remove(inventory.begin(), inventory.end(), item), inventory.end());   
 }
 
-int Entity::getArmorClass()
-{
-	return  this->armorClass;
-}
-
 int Entity::getDamageBonus()
 {
 	return this->damageBonus;

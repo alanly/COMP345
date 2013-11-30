@@ -24,3 +24,6 @@ void Monster::setPosition(Position p) {
 Position Monster::getPosition() {
 	return this->pos;
 }
+int Monster::getArmorClass(){
+	return 10 + getDexterity();
+}
