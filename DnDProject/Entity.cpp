@@ -35,6 +35,10 @@ int Entity::getCurrentHitPoints() {
 	return currentHitPoints;
 }
 
+int Entity::getMaxHitPoints() {
+	return this->maxHitPoints;
+}
+
 void Entity::setCurrentHitPoints(int hp) {
 	this->currentHitPoints = hp;
 }

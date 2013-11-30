@@ -58,5 +58,6 @@ class Entity
 
 				void setCurrentHitPoints(int hp);
 		int getCurrentHitPoints();
+		int getMaxHitPoints();
 };
 
