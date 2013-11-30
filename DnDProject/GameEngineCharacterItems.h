@@ -9,7 +9,7 @@ class GameEngineCharacterItems  : public GameObject
 {
 	private:
 		Character* character;
-		vector<GameObject*> items;
+		map<GameObject*, Item*> items;
 	public:
 		GameEngineCharacterItems(LoaderParameters* parameters, Character* character);
 		~GameEngineCharacterItems(void);
