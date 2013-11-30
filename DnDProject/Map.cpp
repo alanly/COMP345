@@ -31,7 +31,7 @@ void Map::createDefaultMap() {
 	this->map[3][3].setType(STONEWALL);
 
 	spawnMonster(Monster("Skeletor", 1, "Skeletor", 1, Position(5, 5)));
-	spawnMonster(Monster("Skeletor", 1, "Skeletor", 1, Position(7, 8)));
+	spawnMonster(Monster("Skeletor2", 1, "Skeletor2", 1, Position(7, 8)));
 }
 
 vector<Monster> Map::getMonsters() {

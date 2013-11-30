@@ -85,7 +85,8 @@ int Entity::getAttackBonus()
 		less += 5;
 	}
 
-	return (this->attackBonus * 4) + temp;
+	//return (this->attackBonus * 4) + temp;
+	return 1;
 }
 
 /*

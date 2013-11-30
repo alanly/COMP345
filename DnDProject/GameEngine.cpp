@@ -76,14 +76,16 @@ void GameEngine::handleMainEvents()
 					{
 						int initiative = Dice::roleTwentySideDice() + this->c->getAttackBonus();
 
-						if (initiative > monster.getArmorClass())
-						{
+						//if (initiative > monster.getArmorClass())
+						//{
 							int damageDone = (this->c->getStrength()) + (this->c->getAttackBonus());
 							monster.setCurrentHitPoints((monster.getCurrentHitPoints()) - damageDone);
-						}
-
+						//}
+						
 						int damageTaken = (monster.getStrength()) + (monster.getAttackBonus());
 						this->c->setCurrentHitPoints((this->c->getCurrentHitPoints()) - damageTaken);
+						//Console::getInstance()->addLine((string)this->c->getCurrentHitPoints());
+						
 						cout << "Character health: " << this->c->getCurrentHitPoints() << endl;
 						cout << "Monster health: " << monster.getCurrentHitPoints() << endl;					}
 				}
