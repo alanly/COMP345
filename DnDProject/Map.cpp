@@ -30,8 +30,8 @@ void Map::createDefaultMap() {
 	this->map[2][3].setType(STONEWALL);
 	this->map[3][3].setType(STONEWALL);
 
-	spawnMonster(Monster("Negro Demon", 1, "Big Black Demon", 666, Position(5, 5)));
-
+	spawnMonster(Monster("Skeletor", 1, "Skeletor", 1, Position(5, 5)));
+	spawnMonster(Monster("Skeletor", 1, "Skeletor", 1, Position(7, 8)));
 }
 
 vector<Monster> Map::getMonsters() {
