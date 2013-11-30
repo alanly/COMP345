@@ -62,8 +62,9 @@ int Entity::getArmorClass()
 
 int Entity::getDamageBonus()
 {
-	return this->damageBonus
+	return this->damageBonus;
 }
+
 int Entity::getAttackBonus()
 {
 	return this->attackBonus;
