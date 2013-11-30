@@ -320,9 +320,6 @@
     <ClInclude Include="TreasureChestContainerBuilder.h">
       <Filter>Header Files\Builders</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ItemFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
@@ -331,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineConsole.h">
       <Filter>Header Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

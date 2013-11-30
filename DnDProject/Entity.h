@@ -61,5 +61,6 @@ class Entity
 		void setCurrentHitPointss(int hp);
 		int getMaxHitPoints();
 		void setAttackBonus(int a);
+		void setMaxHitPoints(int hp);
 };
 

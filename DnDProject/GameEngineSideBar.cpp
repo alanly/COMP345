@@ -5,8 +5,8 @@ GameEngineSideBar::GameEngineSideBar(LoaderParameters* parameters, Character* ch
 {
 	this->character = character;
 	loadTextures();
-	this->charItemView = new GameEngineCharacterItems(parameters, character);
-	this->charStatsView = new GameEngineCharacterStats(parameters, character);
+	this->charItemView = new GameEngineCharacterItems(new LoaderParameters(parameters->getXPos(), parameters->getYPos(), 300, 32, 0, 0, ""), character);
+	this->charStatsView = new GameEngineCharacterStats(new LoaderParameters(parameters->getXPos(), parameters->getYPos()+300, 300, 25, 0, 0, ""), character);
 }
 
 
@@ -17,7 +17,8 @@ GameEngineSideBar::~GameEngineSideBar(void)
 
 void GameEngineSideBar::handleMainEvents()
 {
-
+	charItemView->handleMainEvents();
+	charStatsView->handleMainEvents();
 }
 void GameEngineSideBar::draw()
 {

@@ -51,6 +51,9 @@ void Entity::setCurrentHitPointss(int hp) {
 	this->currentHitPoints = this->currentHitPoints - hp;
 }
 
+void Entity::setMaxHitPoints(int hp) {
+	this->maxHitPoints = hp;
+}
 
 bool Entity::takeDamage(int dmg)
 {

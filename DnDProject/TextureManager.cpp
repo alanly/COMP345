@@ -50,7 +50,7 @@ bool TextureManager::loadFont(string id, SDL_Renderer* renderer,string message, 
 	if (message == "") message = " ";
 
 	TTF_Init();
-	TTF_Font *font = TTF_OpenFont("res/english_111_adagio_bt.ttf", 24);	
+	TTF_Font *font = TTF_OpenFont("res/GillSansMTPro-Book.otf", 18);	
 	SDL_Surface *surface = TTF_RenderText_Blended(font, message.c_str(), color);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 

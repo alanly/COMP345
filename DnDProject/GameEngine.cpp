@@ -17,16 +17,11 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 	Director* d = new Director();
 	TankCharacterBuilder* tank = new TankCharacterBuilder();
 	d->setCharacterBuilder(tank);
-	d->constructCharacter("RMT",1);
+	d->constructCharacter("Player1",1);
 	c = d->getCharacter();
-	ArmourItem* item = new ArmourItem("Armor","Desc");
-	c->addItemToInventory(item);
-	HelmetItem* hel = new HelmetItem("Helmet1","Desc");
-	c->addItemToInventory(hel);
-
 	map = new Map(20, 20, Position(1, 1), Position(5, 1));
 	mapView = new GameEngineMap(new LoaderParameters(16, 16,670, 480, 0, 0, "gameEngineMap"), map, c, 1);
-	sideBar = new GameEngineSideBar(new LoaderParameters(720, 336, 0, 0, 0, 0, "gameEngineMap"),c);
+	sideBar = new GameEngineSideBar(new LoaderParameters(720, 16, 0, 0, 0, 0, "gameEngineMap"),c);
 	console = new GameEngineConsole(new LoaderParameters(24, 518, 400, 400, 0, 0, "gameEngineConsole"));
 	currentView = GameEngineView::MAIN;
 
@@ -58,13 +53,13 @@ void GameEngine::handleMainEvents()
 {
 	gameUI->handleEvents();
 	mapView->handleEvents();
-
+	sideBar->handleMainEvents();
 	if (gameUI->isClicked())
 	{
 		gameUI->resetClicked();
 
-		//if (mapView->isClicked())
-		//{
+		if (mapView->isClicked())
+		{
 			mapView->resetClicked();
 
 			Position click(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
@@ -143,7 +138,7 @@ void GameEngine::handleMainEvents()
 
 
 			//map->moveCharacter(click);
-		//}
+		}
 	}
 	string input = InputHandler::getInstance()->getInput();
 	if (input != "") {
@@ -187,6 +182,8 @@ void GameEngine::loadTextures() {
 
 void GameEngine::setCharacter(Character* character)
 {
+	ArmourItem* ar = new ArmourItem("Item 1", "dec");
+	character->addItemToInventory(ar);
 	sideBar->setCharacter(character);
 	mapView->setCharacter(character);
 	this->c = character;
