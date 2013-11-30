@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Character.h"
 #include "LoaderParameters.h"
+#include "TextureManager.h"
+#include "Game.h"
 
 class GameEngineCharacterStats : public GameObject
 {
