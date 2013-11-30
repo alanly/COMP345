@@ -5,10 +5,9 @@
 
 MainMenu::MainMenu(LoaderParameters* parameters) : GameObject(parameters)
 {
-
-	playGameButton = new GameObject(new LoaderParameters(0, 0, 238, 36, 0, 0, "playGameButton"));
-	mapEditorButton = new GameObject(new LoaderParameters(0, 37, 238, 36, 0, 0, "mapEditorButton"));
-	quitButton = new GameObject(new LoaderParameters(0, 74, 238, 36, 0, 0, "quitButton"));
+	playGameButton = new GameObject(new LoaderParameters(100, 400, 238, 36, 0, 0, "playGameButton"));
+	mapEditorButton = new GameObject(new LoaderParameters(100, 437, 238, 36, 0, 0, "mapEditorButton"));
+	quitButton = new GameObject(new LoaderParameters(100, 474, 238, 36, 0, 0, "quitButton"));
 
 	loadTextures();
 }
