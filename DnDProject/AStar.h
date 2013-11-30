@@ -95,9 +95,9 @@ string pathFind(vector< vector<Tile> > map, const int & xStart, const int & ySta
     pqi=0;
 
     // reset the node maps
-    for(y=0;y<m;y++)
+    for(y=0;y<map[0].size();y++)
     {
-        for(x=0;x<n;x++)
+        for(x=0;x<map.size();x++)
         {
             closed_nodes_map[x][y]=0;
             open_nodes_map[x][y]=0;
@@ -152,7 +152,7 @@ string pathFind(vector< vector<Tile> > map, const int & xStart, const int & ySta
         for(i=0;i<dir;i++)
         {
             xdx=x+dx[i]; ydy=y+dy[i];
-            if(!(xdx<0 || xdx>n-1 || ydy<0 || ydy>m-1 || 
+            if(!(xdx<0 || xdx>map.size()-1 || ydy<0 || ydy>m-1 || 
 				
 				// changed this
 					!map[xdx][ydy].isWalkable()
