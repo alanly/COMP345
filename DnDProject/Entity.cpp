@@ -67,7 +67,15 @@ int Entity::getDamageBonus()
 
 int Entity::getAttackBonus()
 {
-	return this->attackBonus;
+	int temp = 0;
+	int less = 0;
+	for(int i = 0; i<this->numberOfAttacks;i++)
+	{
+		temp += (this->level - less);
+		less += 5;
+	}
+
+	return (this->attackBonus * 4) + temp;
 }
 
 /*
