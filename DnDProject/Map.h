@@ -62,4 +62,7 @@ public:
 	// load save functions
 	void saveToFile(string fn);
 	static Map* readFromFile(string filename);
+
+	void damageMonster(int m, int hp);
+	void killMonster(int m);
 };

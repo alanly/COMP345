@@ -100,9 +100,11 @@ void GameEngineMap::draw()
 	// draw monsterz
 	for (int i = 0; i < map->getMonsters().size(); i++)
 	{
-		tile = new LoaderParameters(16 + (-(map->getCharacterPosition().x - 10)+map->getMonsters()[i].getPosition().x)*32, 
-			16 + (-(map->getCharacterPosition().y - 7)+map->getMonsters()[i].getPosition().y)*32, CELL_SIZE, CELL_SIZE, 0, 0, "mnstr_skeletor");
-		drawTile(tile);
+		if (map->getMonsters()[i].getCurrentHitPoints() > 1) {
+			tile = new LoaderParameters(16 + (-(map->getCharacterPosition().x - 10)+map->getMonsters()[i].getPosition().x)*32, 
+				16 + (-(map->getCharacterPosition().y - 7)+map->getMonsters()[i].getPosition().y)*32, CELL_SIZE, CELL_SIZE, 0, 0, "mnstr_skeletor");
+			drawTile(tile);
+		}
 	}
 	
 	delete tile;

@@ -18,7 +18,7 @@ private:
 	int drawCount;
 
 	GameObject* gameUI;
-
+	GameObject* gameOver;
 	Character* c;
 
 	Map* map;
@@ -27,7 +27,13 @@ private:
 	GameEngineView currentView;
 	GameEngineConsole* console;
 
+	bool allGone;
+
+	GameObject* winScreen;
+
 public:
+	vector<Monster> monsters;
+
 	GameEngine(LoaderParameters* parameters);
 	~GameEngine();
 

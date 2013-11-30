@@ -11,6 +11,9 @@
 GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gameUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameUI"));
+	gameOver = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameOver"));
+		winScreen = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "winScreen"));
+
 	Director* d = new Director();
 	TankCharacterBuilder* tank = new TankCharacterBuilder();
 	d->setCharacterBuilder(tank);
@@ -27,6 +30,8 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 	console = new GameEngineConsole(new LoaderParameters(24, 518, 400, 400, 0, 0, "gameEngineConsole"));
 	currentView = GameEngineView::MAIN;
 
+	allGone = true;
+
 	loadTextures();
 }
 
@@ -36,11 +41,18 @@ GameEngine::~GameEngine()
 
 void GameEngine::drawMainView()
 {
-
-	gameUI->draw();
-	sideBar->draw();
-	mapView->draw();
-	console->draw();
+	if(!allGone) {
+		winScreen->draw();
+	} if(c->getCurrentHitPoints() < 1) {
+		gameOver->draw();
+				} 
+				else
+				{
+		gameUI->draw();
+		sideBar->draw();
+		mapView->draw();
+		console->draw();
+	}
 }
 void GameEngine::handleMainEvents()
 {
@@ -67,7 +79,7 @@ void GameEngine::handleMainEvents()
 				
 			if (s.length() == 1)
 			{
-				vector<Monster> monsters = map->getMonsters();
+				monsters = map->getMonsters();
 				for (int i = 0; i < monsters.size(); i++)
 				{
 					Monster monster = monsters[i];
@@ -79,31 +91,57 @@ void GameEngine::handleMainEvents()
 						//if (initiative > monster.getArmorClass())
 						//{
 							int damageDone = (this->c->getStrength()) + (this->c->getAttackBonus());
-							monster.setCurrentHitPoints((monster.getCurrentHitPoints()) - damageDone);
+							//monster.setCurrentHitPointss(10);
+							map->damageMonster(i, Dice::roleTenSideDice());
 						//}
+						if (monster.getCurrentHitPoints()>1) {
 						
-						int damageTaken = (monster.getStrength()) + (monster.getAttackBonus());
+							int damageTaken = (monster.getStrength()) + (monster.getAttackBonus());
 						this->c->setCurrentHitPoints((this->c->getCurrentHitPoints()) - damageTaken);
-						//Console::getInstance()->addLine((string)this->c->getCurrentHitPoints());
+						string s = "Your current hit points are: "+std::to_string(this->c->getCurrentHitPoints());
+						Console::getInstance()->addLine(s);
 						
+						
+							s = "Your enemies hit points are: "+std::to_string(monster.getCurrentHitPoints());
+							Console::getInstance()->addLine(s);
+						}
 						cout << "Character health: " << this->c->getCurrentHitPoints() << endl;
-						cout << "Monster health: " << monster.getCurrentHitPoints() << endl;					}
+						cout << "Monster health: " << monster.getCurrentHitPoints() << endl;	
+
+						if (monster.getCurrentHitPoints() < 1) {
+							map->killMonster(i);
+						}
+
+					}
+				}
+			}
+
+			allGone = true;
+
+			monsters = map->getMonsters();
+			for (int i = 0; i < monsters.size(); i++)
+			{
+				if (monsters[i].getCurrentHitPoints() > 1) {
+					allGone = false;
 				}
 			}
 
 
+					SDL_RenderClear(Game::getInstance()->getRenderer());
 
-				SDL_RenderClear(Game::getInstance()->getRenderer());
+					map->moveCharacter((Direction)(s.front() - '0'));
+					gameUI->draw();
+					mapView->draw();
+					console->draw();
 
-				map->moveCharacter((Direction)(s.front() - '0'));
-				gameUI->draw();
-				mapView->draw();
-				console->draw();
+					SDL_RenderPresent(Game::getInstance()->getRenderer());
+					SDL_Delay(100);
+					s = s.substr(1, s.length());
+				}
+			
 
-				SDL_RenderPresent(Game::getInstance()->getRenderer());
-				SDL_Delay(100);
-				s = s.substr(1, s.length());
-			}
+
+
 			//map->moveCharacter(click);
 		//}
 	}
@@ -142,6 +180,9 @@ void GameEngine::draw() {
 
 void GameEngine::loadTextures() {
 	TextureManager::getInstance()->load("img/game/ui/game_ui.png", gameUI->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/ui/game_ui_gameover.png", gameOver->getParameters()->getId(), Game::getInstance()->getRenderer());
+	TextureManager::getInstance()->load("img/game/ui/game_ui_win.png", gameOver->getParameters()->getId(), Game::getInstance()->getRenderer());
+
 }
 
 void GameEngine::setCharacter(Character* character)

@@ -10,10 +10,13 @@ using namespace std;
 Character::Character(string name, int level) : Entity(name,level)
 {
 	this->classification = enumUtility::Tank;
+	this->setCurrentHitPoints(150);
 }
 Character::Character(string name, int level, enumUtility::characterClassifiction classification) : Entity(name,level)
 {
 	this->classification = classification;
+		this->setCurrentHitPoints(200);
+		this->setAttackBonus(15);
 }
 
 Character::~Character(void)

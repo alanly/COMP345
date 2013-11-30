@@ -38,6 +38,14 @@ vector<Monster> Map::getMonsters() {
 	return this->monsters;
 }
 
+void Map::damageMonster(int m, int hp) {
+	this->monsters[m].setCurrentHitPoints(this->monsters[m].getCurrentHitPoints() - hp);
+}
+
+void Map::killMonster(int m) {
+	//lol
+}
+
 void Map::spawnMonster(Monster m)
 {
 	this->monsters.push_back(m);
@@ -151,7 +159,7 @@ bool Map::isMonster(const Position& p)
 {
 	for (int i = 0; i < monsters.size(); i++)
 	{
-		if (monsters[i].getPosition().y == p.y && monsters[i].getPosition().x == p.x) {
+		if (monsters[i].getPosition().y == p.y && monsters[i].getPosition().x == p.x && monsters[i].getCurrentHitPoints() > 1) {
 			return true;
 		}
 	}

@@ -31,6 +31,10 @@ void Entity::initializeStats()
 	this->setCurrentHitPoints(15 + getConstitution());
 }
 
+void Entity::setAttackBonus(int a) {
+	this->attackBonus = a;
+}
+
 int Entity::getCurrentHitPoints() {
 	return currentHitPoints;
 }
@@ -41,6 +45,10 @@ int Entity::getMaxHitPoints() {
 
 void Entity::setCurrentHitPoints(int hp) {
 	this->currentHitPoints = hp;
+}
+
+void Entity::setCurrentHitPointss(int hp) {
+	this->currentHitPoints = this->currentHitPoints - hp;
 }
 
 
