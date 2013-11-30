@@ -46,8 +46,8 @@ void GameEngine::handleMainEvents()
 	{
 		gameUI->resetClicked();
 
-		//if (mapView->isClicked())
-		//{
+		if (mapView->isClicked())
+		{
 			mapView->resetClicked();
 
 			Position click(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
@@ -100,7 +100,7 @@ void GameEngine::handleMainEvents()
 				s = s.substr(1, s.length());
 			}
 			//map->moveCharacter(click);
-		//}
+		}
 	}
 	string input = InputHandler::getInstance()->getInput();
 	if (input != "") {
