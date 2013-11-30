@@ -7,7 +7,7 @@
 #include "Director.h"
 #include "TankCharacterBuilder.h"
 #include "AStar.h"
-
+ 
 GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 {
 	gameUI = new GameObject(new LoaderParameters(0, 0, 960, 640,  0, 0, "gameUI"));
