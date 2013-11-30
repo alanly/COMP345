@@ -25,6 +25,8 @@ void Character::levelUp()
 	currentExp -= expAtLevel; 
 	expAtLevel = levelExpModifier * this->level;
 	maxHitPoints += getConstitution() + Dice::roleTenSideDice();
+	this->attackBonus++;
+	this->numberOfAttacks = (this->level / 5) + 1;
 }
 void Character::gainExperiance(int exp)
 {

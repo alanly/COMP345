@@ -18,6 +18,10 @@ class Entity
 	protected:
 		int level;
 		int currentHitPoints, maxHitPoints;
+		int numberOfAttacks;
+		int attackBonus;
+		int damageBonus;
+		int armorClass;
 	public:
 		Entity(void);
 		~Entity(void);
@@ -43,6 +47,7 @@ class Entity
 		int getDamageBonus();
 		int getAttackBonus();
 
+		int getNumberOfAttacks();
 		 //setters
         void setStrength(int strength);
         void setDexterity(int dexterity);
