@@ -11,7 +11,18 @@ GameEngineCharacterItems::~GameEngineCharacterItems(void)
 }
 void GameEngineCharacterItems::handleMainEvents()
 {
-
+	for(std::map<GameObject*, Item*>::iterator obj=items.begin(); obj!=items.end(); ++obj) {
+		if(obj->first->isClicked()){
+			obj->first->resetClicked();
+			character->removeItemFromInventory(obj->second);
+			if(obj->second->getType() == ItemType::ARMOUR){
+				//character->setArmor(obj->second);
+				ArmourItem* armor = new ArmourItem(obj->second->getName(), obj->second->getDescription());
+				armor->setEnhancements(obj->second->getEnhancements());
+				character->setArmor(armor);
+			}
+		}
+	}
 }
 void GameEngineCharacterItems::draw()
 {
@@ -26,7 +37,8 @@ void GameEngineCharacterItems::draw()
 			SDL_Color  color = {255,255,0};
 			TextureManager::getInstance()->loadFont(gameObj->getParameters()->getId(),Game::getInstance()->getRenderer(), gameObj->getParameters()->getId(), color);
 			gameObj->draw();
-			items.push_back(gameObj);
+			gameObj->handleEvents();
+			items[gameObj] = *iter;
 			y += 25;
 		}
 
