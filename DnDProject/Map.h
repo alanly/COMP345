@@ -56,6 +56,9 @@ public:
 
 	vector<Monster> getMonsters();
 
+	bool isMonsterAround(const Position& p);
+	bool isMonster(const Position& p);
+
 	// load save functions
 	void saveToFile(string fn);
 	static Map* readFromFile(string filename);

@@ -55,5 +55,8 @@ class Entity
         void setIntelligence(int intelligence);
         void setConstitution(int constitution);
         void setWisdom(int wisdom);
+
+				void setCurrentHitPoints(int hp);
+		int getCurrentHitPoints();
 };
 

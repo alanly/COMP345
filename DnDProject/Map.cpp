@@ -88,7 +88,7 @@ void Map::moveCharacter(Direction d)
 	}
 
 	// second check is probably bad practice
-	if (isValidPosition(p) && this->map[p.x][p.y].isWalkable()) {
+	if (isValidPosition(p) && this->map[p.x][p.y].isWalkable() && !isMonster(p)) {
 		setCharacterPosition(p);
 	}
 }
@@ -130,6 +130,33 @@ vector< vector<Tile> > Map::getMap() {
 	return this->map;
 }
 
+/* is there a monster around this current position */
+bool Map::isMonsterAround(const Position& p)
+{	
+	for (int i = 0; i < monsters.size(); i++)
+	{
+		if ((monsters[i].getPosition().y == p.y & monsters[i].getPosition().x == p.x + 1) || 
+			(monsters[i].getPosition().y == p.y & monsters[i].getPosition().x == p.x - 1) || 
+			(monsters[i].getPosition().x == p.x & monsters[i].getPosition().y == p.y - 1) || 
+			(monsters[i].getPosition().x == p.x & monsters[i].getPosition().y == p.y + 1)
+			) {
+				return true;
+		}
+	}
+	return false;
+}
+
+/* is there a monster on this position */
+bool Map::isMonster(const Position& p)
+{
+	for (int i = 0; i < monsters.size(); i++)
+	{
+		if (monsters[i].getPosition().y == p.y && monsters[i].getPosition().x == p.x) {
+			return true;
+		}
+	}
+	return false;
+}
 
 void Map::saveToFile(string fn)
 {

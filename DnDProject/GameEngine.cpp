@@ -62,6 +62,35 @@ void GameEngine::handleMainEvents()
 			//cout<<s<<endl;
 
 			while (s.length() != 0) {
+
+				
+				
+			if (s.length() == 1)
+			{
+				vector<Monster> monsters = map->getMonsters();
+				for (int i = 0; i < monsters.size(); i++)
+				{
+					Monster monster = monsters[i];
+
+					if (click == monster.getPosition())
+					{
+						int initiative = Dice::roleTwentySideDice() + this->c->getAttackBonus();
+
+						if (initiative > monster.getArmorClass())
+						{
+							int damageDone = (this->c->getStrength()) + (this->c->getAttackBonus());
+							monster.setCurrentHitPoints((monster.getCurrentHitPoints()) - damageDone);
+						}
+
+						int damageTaken = (monster.getStrength()) + (monster.getAttackBonus());
+						this->c->setCurrentHitPoints((this->c->getCurrentHitPoints()) - damageTaken);
+						cout << "Character health: " << this->c->getCurrentHitPoints() << endl;
+						cout << "Monster health: " << monster.getCurrentHitPoints() << endl;					}
+				}
+			}
+
+
+
 				SDL_RenderClear(Game::getInstance()->getRenderer());
 
 				map->moveCharacter((Direction)(s.front() - '0'));

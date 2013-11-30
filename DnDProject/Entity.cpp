@@ -27,7 +27,18 @@ void Entity::initializeStats()
 	this->stats[enumUtility::Constitution] = Dice::roleTenSideDice();
 	this->stats[enumUtility::Inteligence] = Dice::roleTenSideDice();
 	this->stats[enumUtility::Wisdom] = Dice::roleTenSideDice();
+
+	this->setCurrentHitPoints(15 + getConstitution());
 }
+
+int Entity::getCurrentHitPoints() {
+	return currentHitPoints;
+}
+
+void Entity::setCurrentHitPoints(int hp) {
+	this->currentHitPoints = hp;
+}
+
 
 bool Entity::takeDamage(int dmg)
 {
