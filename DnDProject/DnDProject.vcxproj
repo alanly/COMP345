@@ -140,6 +140,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemEnhancement.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="LoaderParameters.h" />
     <ClInclude Include="MainMenu.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="NimbleCharacterBuilder.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RingItem.h" />
     <ClInclude Include="SDL_Utilities.h" />
     <ClInclude Include="ShieldItem.h" />
