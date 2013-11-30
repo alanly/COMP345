@@ -37,8 +37,16 @@ void Character::gainExperiance(int exp)
 	}
 }
 int Character::getArmorClass(){
-	return 10 + (getDexterity() + getArmor()->getEnhancement(ItemEnhancement::ARMOUR_CLASS) + getShield()->getEnhancement(ItemEnhancement::ARMOUR_CLASS));
+	int total = getDexterity() + 10;
+	if(getArmor() != nullptr){
+		total += getArmor()->getEnhancement(ItemEnhancement::ARMOUR_CLASS);
+	}
+	if(getShield() != nullptr){
+		total += getShield()->getEnhancement(ItemEnhancement::ARMOUR_CLASS);
+	}
+	return total;
 }
+
 enumUtility::characterClassifiction Character::getClassification()
 {
 	return this->classification;

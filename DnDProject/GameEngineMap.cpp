@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include "InputHandler.h"
 #include "Game.h"
-
+#include "Console.h"
 #include <iostream>
 
 GameEngineMap::GameEngineMap(LoaderParameters* parameters, Map* map, Character* character, int mode) : GameObject(parameters)
@@ -50,7 +50,6 @@ void GameEngineMap::draw()
 			if ((startX > -1 && startX < map->getWidth() && startY > -1 && startY < map->getHeight())) {
 				tile = new LoaderParameters(16 + x*32, 16 + y*32, CELL_SIZE, CELL_SIZE, 0, 0, "tile_empty");
 				//drawTile(tile);
-
 				switch (map->getType(Position(startX, startY)))
 				{
 				case EMPTY:

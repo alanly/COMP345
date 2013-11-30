@@ -22,8 +22,9 @@ GameEngine::GameEngine(LoaderParameters* parameters) : GameObject(parameters)
 	c->addItemToInventory(hel);
 
 	map = new Map(20, 20, Position(1, 1), Position(5, 1));
-	mapView = new GameEngineMap(new LoaderParameters(16, 16, 0, 0, 0, 0, "gameEngineMap"), map, c, 1);
+	mapView = new GameEngineMap(new LoaderParameters(16, 16,670, 480, 0, 0, "gameEngineMap"), map, c, 1);
 	sideBar = new GameEngineSideBar(new LoaderParameters(720, 336, 0, 0, 0, 0, "gameEngineMap"),c);
+	console = new GameEngineConsole(new LoaderParameters(24, 518, 400, 400, 0, 0, "gameEngineConsole"));
 	currentView = GameEngineView::MAIN;
 
 	loadTextures();
@@ -39,33 +40,41 @@ void GameEngine::drawMainView()
 	gameUI->draw();
 	sideBar->draw();
 	mapView->draw();
+	console->draw();
 }
-
 void GameEngine::handleMainEvents()
 {
 	gameUI->handleEvents();
+	mapView->handleEvents();
 
 	if (gameUI->isClicked())
 	{
-		Position click(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
 		gameUI->resetClicked();
 
-		string s = pathFind(map->getMap(), map->getCharacterPosition().x, map->getCharacterPosition().y, click.x, click.y);
+		//if (mapView->isClicked())
+		//{
+			mapView->resetClicked();
 
-		//cout<<s<<endl;
+			Position click(mapView->getMouseClickedColumn(), mapView->getMouseClickedRow());
 
-		while (s.length() != 0) {
-			SDL_RenderClear(Game::getInstance()->getRenderer());
+			string s = pathFind(map->getMap(), map->getCharacterPosition().x, map->getCharacterPosition().y, click.x, click.y);
 
-			map->moveCharacter((Direction)(s.front() - '0'));
-			gameUI->draw();
-			mapView->draw();
+			//cout<<s<<endl;
 
-			SDL_RenderPresent(Game::getInstance()->getRenderer());
-			SDL_Delay(100);
-			s = s.substr(1, s.length());
-		}
-		//map->moveCharacter(click);
+			while (s.length() != 0) {
+				SDL_RenderClear(Game::getInstance()->getRenderer());
+
+				map->moveCharacter((Direction)(s.front() - '0'));
+				gameUI->draw();
+				mapView->draw();
+				console->draw();
+
+				SDL_RenderPresent(Game::getInstance()->getRenderer());
+				SDL_Delay(100);
+				s = s.substr(1, s.length());
+			}
+			//map->moveCharacter(click);
+		//}
 	}
 	string input = InputHandler::getInstance()->getInput();
 	if (input != "") {
@@ -73,22 +82,18 @@ void GameEngine::handleMainEvents()
 		//cout<< inputChar<<endl;
 		if (mapView->getMode() == 0) {
 			if (input == "W") {
-				//map->setCharacterPosition(Position(map->getCharacterPosition().x, (map->getCharacterPosition().y)-1));
-				map->moveCharacter(UP);
+								map->moveCharacter(UP);
 			} else if (input == "A") {
-				//map->setCharacterPosition(Position((map->getCharacterPosition().x)-1, map->getCharacterPosition().y));
-				map->moveCharacter(LEFT);
+								map->moveCharacter(LEFT);
 			} else if (input == "S") {
-				//map->setCharacterPosition(Position(map->getCharacterPosition().x, (map->getCharacterPosition().y)+1));
-				map->moveCharacter(DOWN);
+								map->moveCharacter(DOWN);
 			} else if (input == "D") {
-				//map->setCharacterPosition(Position((map->getCharacterPosition().x)+1, map->getCharacterPosition().y));
-				map->moveCharacter(RIGHT);
+						map->moveCharacter(RIGHT);
 			}
-			//cout<<"["<<map->getCharacterPosition().x<<", "<<map->getCharacterPosition().y<<"]"<<endl;
 		}
 	}
 }
+
 
 void GameEngine::handleEvents() {
 	handleMainEvents();

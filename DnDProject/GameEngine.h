@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "Map.h"
 #include "GameEngineSideBar.h"
+#include "GameEngineConsole.h"
+#include "Console.h"
 
 class GameEngine : public GameObject
 {
@@ -23,6 +25,7 @@ private:
 	GameEngineMap* mapView;
 	GameEngineSideBar* sideBar;
 	GameEngineView currentView;
+	GameEngineConsole* console;
 
 public:
 	GameEngine(LoaderParameters* parameters);
