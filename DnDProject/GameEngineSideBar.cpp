@@ -17,7 +17,8 @@ GameEngineSideBar::~GameEngineSideBar(void)
 
 void GameEngineSideBar::handleMainEvents()
 {
-
+	charItemView->handleMainEvents();
+	charStatsView->handleMainEvents();
 }
 void GameEngineSideBar::draw()
 {

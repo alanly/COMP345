@@ -41,7 +41,7 @@ void GameEngine::handleMainEvents()
 {
 	gameUI->handleEvents();
 	mapView->handleEvents();
-
+	sideBar->handleMainEvents();
 	if (gameUI->isClicked())
 	{
 		gameUI->resetClicked();
